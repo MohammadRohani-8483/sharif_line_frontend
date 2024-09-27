@@ -1,0 +1,118 @@
+@import url("fonts.css");
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    outline: 0;
+    border: 0;
+    -webkit-tap-highlight-color: transparent;
+    font-family: IranYekan;
+    direction: rtl;
+    /* text-align: right; */
+    transition: all 0.5s;
+}
+
+body{
+    background-color: #fafafa;
+    overflow: hidden;
+}
+
+:root {
+    --sidebar-bg : #333;
+    --grey-f : #FFF;
+    --Main : #2979FF;
+    --Main10: rgba(41, 121, 255, 0.10);
+    --hover_main: #1469F7;
+    --Gray-2 : #222;
+    --gray-a : #AAA;
+    --grey-e : #EEE;
+    --gray-fa : #FAFAFA;
+    --gray-7 : #777;
+    --grey-r : #F00;
+    --gray-6 : #666;
+    --gray-8 : #888;
+    --gray-9 : #999;
+    --gray-c : #CCC;
+    --sm: 640px;
+    --md: 768px;
+    --lg: 1024px;
+    --xl: 1280px;
+    --Main-filter : invert(38%) sepia(73%) saturate(3623%) hue-rotate(208deg) brightness(103%) contrast(101%);
+    --rt-opacity : 1 !important;
+}
+html {
+    font-size: 62.5%;
+}
+a {
+    text-decoration: none;
+}
+
+input::-ms-reveal, input::-ms-clear {
+    display: none
+}
+
+span, label, ::before {
+    display: inline-block
+}
+
+@media (prefers-color-scheme: dark) {
+    .next-error-h1 {
+        border-color: #000 !important;
+    }
+
+    .next-error-h1 + div h2 {
+        font-size: 23px !important;
+    }
+
+    div:has(>.next-error-h1) {
+        direction: ltr;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    background-color: rgba(216, 216, 216, 0.623);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(77, 77, 77, 0.795);
+    border-radius: 12px;
+}
+
+.no-scroll{
+    overflow: hidden !important;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .5;
+    }
+}
+
+.react-tooltip__place-right .tooltip-svg , .react-tooltip__place-left .tooltip-svg {
+    top: 50% !important;
+    transform: translateY(-50%) rotate(-90deg) !important;
+    height: 20px;
+}
+
+.react-tooltip__place-right .tooltip-svg  {
+    left: -35px !important;
+
+}
+.react-tooltip__place-left .tooltip-svg  {
+    right: -35px !important;
+}
+.react-tooltip__place-top .tooltip-svg {
+    bottom: -16px !important;
+    top: unset !important;
+    transform: rotateX(180deg) translateX(-50%) !important;
+
+}
+.hidden{
+    display: none !important;
+}

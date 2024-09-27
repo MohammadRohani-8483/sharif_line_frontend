@@ -1,0 +1,11 @@
+{
+    "USER": {
+        "REFRESH": "/core/auth/refresh",
+        "ME": "/core/auth/me",
+        "LOGOUT" : "/core/auth/logout"
+    } ,
+    "QUESTIONNAIRES_LIST" : "/question/archive",
+    "COMMUNICATION" : "/core/communication" ,
+    "CONDITION" : "/question/condition",
+    "MAJORS" : "/core/major"
+}

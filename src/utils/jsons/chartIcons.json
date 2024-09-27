@@ -1,0 +1,7 @@
+{
+  "circle": { "icon": "circle-chart", "name": "دایره ای" },
+  "verticalBar": { "icon": "vertical-bar-chart", "name": "عمودی" },
+  "horizontalBar": { "icon": "horizontal-bar-chart", "name": "افقی" },
+  "line": { "icon": "line-chart", "name": "خطی" },
+  "table": { "icon": "table-chart", "name": "جدول" }
+}
