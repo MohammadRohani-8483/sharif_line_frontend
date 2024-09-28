@@ -3,6 +3,8 @@ import * as Oidc from "@axa-fr/react-oidc";
 import { CustomHistory } from "@axa-fr/react-oidc/dist/core/routes/withRouter";
 import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
+import Loading from "./loading";
+import ErrorComp from "./ErrorComp";
 
 const configuration = {
   client_id: `${process.env.NEXT_PUBLIC_SSO_CLIENT}`,
@@ -14,7 +16,7 @@ const configuration = {
   scope: "openid profile offline_access",
   authority: `${process.env.NEXT_PUBLIC_AUTHORITY_URL}`,
   preload_user_info: true,
-  service_worker_relative_url: '/OidcServiceWorker.js'
+  service_worker_relative_url: "/OidcServiceWorker.js",
 };
 
 const onEvent = (configurationName: string, eventName: string, data: any) => {
@@ -37,6 +39,11 @@ export default function OidcProvider({ children }: { children: ReactNode }) {
       configuration={configuration}
       onEvent={onEvent}
       withCustomHistory={withCustomHistory}
+      loadingComponent={Loading}
+      callbackSuccessComponent={() => children}
+      authenticatingErrorComponent={() => (
+        <ErrorComp statusCode={401} message="شما احراز هویت نشده اید." />
+      )}
     >
       <Oidc.OidcSecure>{children}</Oidc.OidcSecure>
     </Oidc.OidcProvider>
