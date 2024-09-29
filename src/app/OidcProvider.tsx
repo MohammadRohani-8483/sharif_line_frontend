@@ -6,7 +6,7 @@ import { ReactNode } from "react";
 import Loading from "./loading";
 import ErrorComp from "./ErrorComp";
 
-const configuration = {
+const configuration: Oidc.OidcConfiguration = {
   client_id: `${process.env.NEXT_PUBLIC_SSO_CLIENT}`,
   token_request_extras: {
     client_secret: `${process.env.NEXT_PUBLIC_SSO_SECRET}`,
@@ -15,6 +15,7 @@ const configuration = {
   silent_redirect_uri: `${process.env.NEXT_PUBLIC_DOMAIN}/authentication/silent-callback`, // Optional activate silent-signin that use cookies between OIDC server and client javascript to restore the session
   scope: "openid profile offline_access",
   authority: `${process.env.NEXT_PUBLIC_AUTHORITY_URL}`,
+  service_worker_only: true,
   preload_user_info: true,
   service_worker_relative_url: "/OidcServiceWorker.js",
 };

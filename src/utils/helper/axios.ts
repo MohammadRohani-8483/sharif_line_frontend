@@ -9,14 +9,14 @@ axios.defaults.baseURL = isServer ? `http://${process.env.BASE_URL}/` : '/api/';
 export const axiosInstance = (token?: Tokens) => {
     let reduxToken = store.getState().base.token;
     const origToken = { access: process.env.NEXT_PUBLIC_TOKEN || token?.access || reduxToken.access, refresh: token?.refresh || reduxToken.refresh }
-    const instanse = axios.create({
+    const instance = axios.create({
         headers: {
             'Content-Type': 'application/json',
         }
     });
-    if (origToken.access) instanse.defaults.headers['Authorization'] = `JWT ${origToken.access}`
+    if (origToken.access) instance.defaults.headers['Authorization'] = `Bearer ${origToken.access}`
 
-    instanse.interceptors.response.use(function (response: AxiosResponse) {
+    instance.interceptors.response.use(function (response: AxiosResponse) {
         return response;
     }, async function (error: AxiosError) {
         if (!error.response || isServer)
@@ -28,7 +28,7 @@ export const axiosInstance = (token?: Tokens) => {
                         withCredentials: true
                     })
                         .then(() => {
-                            instanse.request(error.config!);
+                            instance.request(error.config!);
                         })
                         .catch(() => Promise.reject(error.response))
                 }
@@ -36,7 +36,7 @@ export const axiosInstance = (token?: Tokens) => {
         }
         return Promise.reject(error);
     });
-    return instanse
+    return instance
 }
 
 

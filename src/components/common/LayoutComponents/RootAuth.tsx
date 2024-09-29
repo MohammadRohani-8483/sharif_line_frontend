@@ -50,7 +50,8 @@ export const RootAuthorization = ({
 
   if (loading) return <Loading />;
   else if (loginNeeded && !authorized)
-    return <ErrorComp statusCode={401} message="شما احراز هویت نشده اید." />;
+  return <ErrorComp statusCode={401} message="شما احراز هویت نشده اید." />;
   else if (!loginNeeded || authorized) return children;
   return <></>;
+  return children;
 };

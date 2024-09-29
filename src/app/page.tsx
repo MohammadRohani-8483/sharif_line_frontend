@@ -17,6 +17,7 @@ import { T_Mode, T_Response } from "@/src/utils/types/global";
 import { NotFoundSearchContainer, NotFoundTitle } from '../styles/common/search-results';
 import { Icon } from '../styles/common/icon';
 import { useSearchParams } from 'next/navigation';
+import { useOidcAccessToken, useOidcIdToken } from '@axa-fr/react-oidc';
 
 const Page = () => {
   const [flag, setFlag] = useState(false)
@@ -61,6 +62,12 @@ const Page = () => {
     setFilter(p => ({ ...p, page: 1 }))
   }, [flag])
 
+  // const { accessToken, accessTokenPayload } = useOidcAccessToken();
+  // const { idToken, idTokenPayload } = useOidcIdToken();
+  // console.log('accessToken',accessToken)
+  // console.log('accessTokenPayload',accessTokenPayload)
+  // console.log('idToken',idToken)
+  // console.log('idTokenPayload',idTokenPayload)
   return (
     <PageCont>
       <Navbar>
