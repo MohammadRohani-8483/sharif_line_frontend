@@ -1,7 +1,7 @@
 {
     "USER": {
         "REFRESH": "/core/auth/refresh",
-        "ME": "/core/auth/me",
+        "ME": "/core/auth/me/",
         "LOGOUT" : "/core/auth/logout"
     } ,
     "QUESTIONNAIRES_LIST" : "/question/archive",

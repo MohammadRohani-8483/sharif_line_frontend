@@ -29,6 +29,7 @@ export default function OidcProvider({ children }: { children: ReactNode }) {
   const withCustomHistory: () => CustomHistory = () => {
     return {
       replaceState: (url) => {
+        console.log(url)
         router.replace(url || "");
         window.dispatchEvent(new Event("popstate"));
       },

@@ -14,12 +14,12 @@ export const axiosInstance = (token?: Tokens) => {
             'Content-Type': 'application/json',
         }
     });
-    if (origToken.access) instance.defaults.headers['Authorization'] = `Bearer ${origToken.access}`
+    if (origToken.access) instance.defaults.headers['Authorization'] = `JWT ${origToken.access}`
 
     instance.interceptors.response.use(function (response: AxiosResponse) {
         return response;
     }, async function (error: AxiosError) {
-        if (!error.response || isServer)
+        if (!error.response || isServer) 
             return Promise.reject(error);
         switch (error.response.status) {
             case 401:
