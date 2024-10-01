@@ -12,8 +12,8 @@ import Link from "next/link";
 
 type props = {
   groupId: string;
-  versionsData: I_VersionsList;
-  activeOption: T_Version;
+  versionsData: I_VersionsList | null;
+  activeOption: T_Version | null;
   setActiveOption: (active: T_Version) => void;
   linkItem: (group: string, id: string) => string;
 };
@@ -60,7 +60,7 @@ const Dropdown = (p: props) => {
       <SelectInput onClick={toggling} $activeOption={Boolean(p.activeOption)}>
         <Item
           version={p.activeOption}
-          isActive={p.versionsData.active_version === p.activeOption.version}
+          isActive={p.versionsData?.active_version === p.activeOption?.version}
         />
         <motion.div
           animate={isOpen ? { rotateZ: 180 } : { rotateZ: 0 }}
@@ -72,17 +72,17 @@ const Dropdown = (p: props) => {
       {isOpen && (
         <SelectOptions>
           <OptionsParent className="ltr">
-            {p.versionsData.versions.map((option, i) => (
+            {p.versionsData?.versions.map((option, i) => (
               <Option
                 href={p.linkItem(p.groupId, option.id)}
                 onClick={() => handleOptionsClick(option)}
-                $active={option.id === p.activeOption.id}
+                $active={option.id === p.activeOption?.id}
                 key={i}
                 className="item"
               >
                 <Item
                   version={option}
-                  isActive={p.versionsData.active_version === option.version}
+                  isActive={p.versionsData?.active_version === option.version}
                 />
               </Option>
             ))}
@@ -96,7 +96,7 @@ const Dropdown = (p: props) => {
 
 export default Dropdown;
 
-const Item = (p: { version: T_Version; isActive: boolean }) => {
+const Item = (p: { version: T_Version | null; isActive: boolean }) => {
   return (
     <div
       style={{
@@ -114,9 +114,9 @@ const Item = (p: { version: T_Version; isActive: boolean }) => {
           alignItems: "center",
         }}
       >
-        <Text $color="#333">نسخه {p.version.version}</Text>
+        <Text $color="#333">نسخه {p.version?.version}</Text>
         <Text $color="#EEE">|</Text>
-        <Text $color="#333">{convertDate(p.version.created_at)}</Text>
+        <Text $color="#333">{convertDate(p.version?.created_at || "")}</Text>
       </div>
       {p.isActive && (
         <div
@@ -133,7 +133,7 @@ const Item = (p: { version: T_Version; isActive: boolean }) => {
   );
 };
 
-const ManageVersions = (p:{group:string}) => {
+const ManageVersions = (p: { group: string }) => {
   return (
     <div style={{ width: "100%", padding: 10, borderTop: "1px solid #EEE" }}>
       <Link

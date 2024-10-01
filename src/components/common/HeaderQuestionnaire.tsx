@@ -24,7 +24,7 @@ import {
 
 type Props = {
   title: string;
-  versionList: I_VersionsList;
+  versionList: I_VersionsList | null;
 };
 
 export const HeaderQuestionnaire = (p: Props) => {
@@ -41,8 +41,9 @@ export const HeaderQuestionnaire = (p: Props) => {
     [params]
   );
 
-  const [activeVersions, setActiveVersions] = useState<T_Version>(
-    p.versionList.versions.find((version) => version.id === questionnaireId)!
+  const [activeVersions, setActiveVersions] = useState<T_Version | null>(
+    p.versionList?.versions.find((version) => version.id === questionnaireId) ||
+      null
   );
 
   const modalContext = useContext(ModalContext);

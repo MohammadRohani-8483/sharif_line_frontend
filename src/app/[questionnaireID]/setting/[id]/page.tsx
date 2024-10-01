@@ -31,7 +31,7 @@ export default async function Page(p: Props) {
   return (
     <PageContainer>
       <HeaderQuestionnaire
-        versionList={versionsList!}
+        versionList={versionsList}
         title="انتخابات ریاست جمهوری"
       />
     </PageContainer>
