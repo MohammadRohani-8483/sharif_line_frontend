@@ -40,6 +40,7 @@ export interface I_ApiQSSettingResponse {
   };
   version: number;
   is_editable: boolean;
+  description: null | string;
   template: "S";
   duration: string | null;
   is_template: boolean;

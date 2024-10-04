@@ -52,6 +52,7 @@ export default function ClientSettingVersion(p: {
   const [data, setData] = useState({
     timer: TimerCalculator(p.versionData?.duration || null),
     isRequiredLogin: p.versionData?.is_required_login || false,
+    desc: p.versionData?.description || "",
   });
   const [selectorAppear, setSelectorAppear] = useState(false);
 
@@ -82,6 +83,7 @@ export default function ClientSettingVersion(p: {
       setData({
         timer: TimerCalculator(response.data.duration || null),
         isRequiredLogin: response.data.is_required_login,
+        desc: response.data.description || "",
       });
       return response.data;
     },
@@ -114,6 +116,7 @@ export default function ClientSettingVersion(p: {
                 ? Object.values(data.timer).join(":")
                 : null,
               is_required_login: data.isRequiredLogin,
+              description: data.desc,
             }
           : {
               active_version: versionData?.version,
@@ -152,7 +155,10 @@ export default function ClientSettingVersion(p: {
       <BodyCont>
         <Description>
           <Text color="#333">توضیحات نسخه</Text>
-          <TextareaDescription />
+          <TextareaDescription
+            onChange={(e) => setData((p) => ({ ...p, desc: e.target.value }))}
+            value={data.desc}
+          />
         </Description>
         <LeftSideDesc>
           <StatusVersion>
