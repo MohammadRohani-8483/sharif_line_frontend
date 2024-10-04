@@ -4,15 +4,17 @@ import { motion } from "framer-motion";
 import theme from "@/src/styles/theme";
 import { Icon } from "@/src/styles/common/icon";
 import {
-  I_VersionsList,
+  I_GroupData,
   T_Version,
 } from "@/src/utils/types/pages/questionnaire";
 import { convertDate } from "@/src/utils/functions/global";
 import Link from "next/link";
+import { Text } from "@/src/styles/common";
+import Status from "./Status";
 
 type props = {
   groupId: string;
-  versionsData: I_VersionsList | null;
+  versionsData: I_GroupData | null;
   activeOption: T_Version | null;
   setActiveOption: (active: T_Version) => void;
   linkItem: (group: string, id: string) => string;
@@ -118,17 +120,7 @@ const Item = (p: { version: T_Version | null; isActive: boolean }) => {
         <Text $color="#EEE">|</Text>
         <Text $color="#333">{convertDate(p.version?.created_at || "")}</Text>
       </div>
-      {p.isActive && (
-        <div
-          style={{
-            color: "#1EFF29",
-            padding: "2px 8px",
-            backgroundColor: "#DAFFDB",
-          }}
-        >
-          فعال
-        </div>
-      )}
+      {p.isActive && <Status isActive />}
     </div>
   );
 };
@@ -178,17 +170,6 @@ const SelectInput = styled.div<SelectInputProps>`
   border: 1px solid ${theme.colors.neutral.e};
   border-radius: 8px;
   cursor: pointer;
-`;
-
-const Text = styled.p<{
-  $fontSize?: number;
-  $fontWeight?: number;
-  $color?: string;
-}>`
-  font-size: ${(p) => p.$fontSize || 16}px;
-  font-weight: ${(p) => p.$fontWeight || 500};
-  color: ${(p) => p.$color || "#000"};
-  white-space: nowrap;
 `;
 
 const SelectOptions = styled.div`

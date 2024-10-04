@@ -18,13 +18,13 @@ import Link from "next/link";
 import { useSearchParams, usePathname, useParams } from "next/navigation";
 import Dropdown from "./Dropdown";
 import {
-  I_VersionsList,
+  I_GroupData,
   T_Version,
 } from "@/src/utils/types/pages/questionnaire";
 
 type Props = {
   title: string;
-  versionList: I_VersionsList | null;
+  groupData: I_GroupData | null;
 };
 
 export const HeaderQuestionnaire = (p: Props) => {
@@ -42,7 +42,7 @@ export const HeaderQuestionnaire = (p: Props) => {
   );
 
   const [activeVersions, setActiveVersions] = useState<T_Version | null>(
-    p.versionList?.versions.find((version) => version.id === questionnaireId) ||
+    p.groupData?.versions.find((version) => version.id === questionnaireId) ||
       null
   );
 
@@ -97,7 +97,7 @@ export const HeaderQuestionnaire = (p: Props) => {
         <Dropdown
           groupId={groupId}
           linkItem={(group, id) => `/${group}/setting/${id}`}
-          versionsData={p.versionList}
+          versionsData={p.groupData}
           activeOption={activeVersions}
           setActiveOption={setActiveVersions}
         />

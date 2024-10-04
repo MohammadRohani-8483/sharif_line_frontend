@@ -168,6 +168,7 @@ export const TimingSection = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
+  width: 100%;
 
   &.titleSection {
     flex: 1 0 0;

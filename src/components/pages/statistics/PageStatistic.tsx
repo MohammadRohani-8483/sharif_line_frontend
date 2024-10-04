@@ -4,7 +4,7 @@ import { Icon } from "@/src/styles/common/icon";
 import { ModeCont, Questionnaires } from "@/src/styles/pages/questionnaire";
 import { TitleStatge } from "@/src/styles/pages/statistics";
 import { T_ChartMode, T_ChartResponse, T_Mode } from "@/src/utils/types/global";
-import { I_VersionsList } from "@/src/utils/types/pages/questionnaire";
+import { I_GroupData } from "@/src/utils/types/pages/questionnaire";
 import { Fragment, useCallback, useMemo, useState } from "react";
 import Paginate from "../../common/Paginate";
 import ModeSelect from "../questionnaire-list/ModeSelect";
@@ -21,7 +21,7 @@ import { download } from "@/src/utils/functions/global";
 
 export type Props = {
   charts: T_ChartResponse;
-  versions: I_VersionsList;
+  versions: I_GroupData;
 };
 
 const chartPageSize = 18;

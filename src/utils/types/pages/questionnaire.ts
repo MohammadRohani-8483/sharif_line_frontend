@@ -20,9 +20,10 @@ export type T_Version = {
   id: string; // uuid
   version: number;
   created_at: string;
+  description: string | null;
 };
 
-export interface I_VersionsList {
+export interface I_GroupData {
   id: number; // group_id
   is_active: boolean;
   active_version: number; // version
