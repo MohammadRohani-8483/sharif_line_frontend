@@ -24,7 +24,7 @@ export default function PaymentPage({ searchParams }: Props) {
     <PageCont>
       <Icon name='logo-answer' width={194} height={82} style={{ margin: '40px auto' }} />
       <PaymentBox>
-        <ParentImage w={searchParams.result === 'success' ? 151.3 : 150} h={searchParams.result === 'success' ? 110 : 148.75} md_h={searchParams.result === 'success' ? 135 : 172.1} md_w={searchParams.result === 'success' ? 135 : 173.5}>
+        <ParentImage $w={searchParams.result === 'success' ? 151.3 : 150} $h={searchParams.result === 'success' ? 110 : 148.75} $md_h={searchParams.result === 'success' ? 135 : 172.1} $md_w={searchParams.result === 'success' ? 135 : 173.5}>
           <Image
             src={`/images/svg/payment-${searchParams.result}.svg`}
             alt='success'

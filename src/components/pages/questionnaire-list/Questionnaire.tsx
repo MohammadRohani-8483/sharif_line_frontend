@@ -1,6 +1,6 @@
 import { convertDate, formatNumber } from '@/src/utils/functions/global'
 import { isOpen, T_Mode } from '@/src/utils/types/global'
-import { T_QuestionareList } from '@/src/utils/types/pages/questionnaire'
+import { T_QuestionnaireList } from '@/src/utils/types/pages/questionnaire'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { Body, Buttons, Container, Footer, FootItem, HeadItem } from '@/src/styles/pages/questionnaire'
@@ -11,7 +11,7 @@ import { toast } from 'react-toastify'
 import { Icon } from '@/src/styles/common/icon'
 import { Tooltip } from "@/src/components/common/Tooltip";
 
-const Questionnaire = ({ mode, data, setFlag, isArchive, setSearchNull }: { mode: T_Mode, data: T_QuestionareList, setFlag: () => void, isArchive?: boolean, setSearchNull?: () => void }) => {
+const Questionnaire = ({ mode, data, setFlag, isArchive, setSearchNull }: { mode: T_Mode, data: T_QuestionnaireList, setFlag: () => void, isArchive?: boolean, setSearchNull?: () => void }) => {
     const [openPopup, setOpenPopup] = useState<isOpen>({ open: false, visible: false })
 
     const restoreQuestionnaire = () => {

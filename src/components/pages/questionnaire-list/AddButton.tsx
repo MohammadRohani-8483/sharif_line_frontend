@@ -34,7 +34,7 @@ const AddButton = ({ setFlag }: { setFlag: () => void }) => {
                     ایجاد با قالب
                 </div>
             </Items>
-            {open && <Overlay onClick={clickHandle} zindex={4}></Overlay>}
+            {open && <Overlay onClick={clickHandle} $zIndex={4}/>}
             {templatePopup && <TemplatePopup setFlag={setFlag} onClose={() => setTemplatePopup(false)} />}
         </>
     )

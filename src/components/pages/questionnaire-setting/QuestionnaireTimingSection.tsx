@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Tick from "@/src/components/common/Tick";
 import { Icon } from "@/src/styles/common/icon";
 import { TimeSelector } from "@/src/components/pages/questionnaire-setting/TimeSelector";
-import { T_SetState } from "common-types";
+import { T_SetState } from "@/src/utils/types/global";
 import {
     QuestionnaireTimerContainer, QuestionnaireTimingContainer,
     QuestionnaireTitle,

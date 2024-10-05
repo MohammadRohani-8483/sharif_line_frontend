@@ -7,12 +7,12 @@ export const GenderBox = ({targetGender, setTargetData}: {
     setTargetData: T_SetState<Omit<I_Condition, 'id'>>
 }) => {
     return <GenderBoxContainer>
-        <GenderOption active={targetGender === 'M'}
+        <GenderOption $active={targetGender === 'M'}
                       onClick={() => setTargetData(prevState => ({...prevState, gender: 'M'}))}>
             مرد
         </GenderOption>
         <hr />
-        <GenderOption active={targetGender === 'F'}
+        <GenderOption $active={targetGender === 'F'}
                       onClick={() => setTargetData(prevState => ({...prevState, gender: 'F'}))}>
             زن
         </GenderOption>
@@ -31,14 +31,14 @@ const GenderBoxContainer = styled.div`
     background: var(--grey-e);
   }
 `
-const GenderOption = styled.div<{ active: boolean }>`
+const GenderOption = styled.div<{ $active: boolean }>`
   display: flex;
   padding: 16px 10px;
   justify-content: center;
   align-items: center;
   gap: 10px;
   flex: 1 0 0;
-  background: ${p => p.active ? 'var(--gray-fa)' : 'white'};
+  background: ${p => p.$active ? 'var(--gray-fa)' : 'white'};
   transition: 0.3s;
   font-size: 1.6rem;
   color: var(--sidebar-bg);

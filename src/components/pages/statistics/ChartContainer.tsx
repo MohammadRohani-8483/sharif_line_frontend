@@ -1,5 +1,5 @@
 import { ChartCont, ChartTitle, LegendCont, Legends } from '@/src/styles/components/chartContainer'
-import React, { memo, useCallback, useMemo, useState } from 'react'
+import React, { memo, useCallback, useState } from 'react'
 import chartIcons from '@/src/utils/jsons/chartIcons.json'
 import ChartPopup from '../../popups/ChartPopup'
 import { isOpen, T_ChartData, T_ChartMode } from '@/src/utils/types/global'
@@ -77,7 +77,7 @@ const ChartContainer = ({ index, mode, data }: Props) => {
       }
       {openPopup.open && <>
         <ChartPopup open={openPopup} setOpen={setOpenPopup} setType={setType} activeType={type} />
-        <Overlay zindex={9}
+        <Overlay $zIndex={9}
           onClick={() => {
             closePopup(setOpenPopup)
             document.getElementById('scroll')?.classList.remove('no-scroll')

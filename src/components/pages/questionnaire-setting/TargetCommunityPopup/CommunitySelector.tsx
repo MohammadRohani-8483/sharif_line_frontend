@@ -5,7 +5,7 @@ import {
 import {Icon} from "@/src/styles/common/icon";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {AxiosResponse} from "axios";
-import {I_ApiCommunicationResponse, I_Communication} from "@/src/utils/types/pages/questionnaireSetting";
+import {I_Communication, I_Condition} from "@/src/utils/types/pages/questionnaireSetting";
 import {axiosInstance} from "@/src/utils/helper/axios";
 import ENDPOINTS from "@/src/utils/jsons/endpoints.json";
 import {useEffect, useState} from "react";
@@ -13,13 +13,14 @@ import {TargetFieldPopover} from "@/src/components/pages/questionnaire-setting/T
 import {
     AddConditionButton, SelectedCommunicationItem
 } from "@/src/styles/pages/questionnaire-setting/targets-popup";
+import { T_Response } from "@/src/utils/types/global";
 
 export const CommunitySelector = ({targetCommunications, updateCommunicationsData}: {
     targetCommunications: I_Communication[],
     updateCommunicationsData: (List: I_Communication[], Item: I_Communication) => void
 }) => {
     const [majorsSearchValue, setMajorsSearchValue] = useState<string>('');
-    const CommunicationQuery: UseQueryResult<AxiosResponse<I_ApiCommunicationResponse>> = useQuery({
+    const CommunicationQuery: UseQueryResult<AxiosResponse<T_Response<I_Condition>>> = useQuery({
         queryKey: ['CommunicationQuery'],
         queryFn: async () => await axiosInstance().get(ENDPOINTS.COMMUNICATION + `${majorsSearchValue ? `?search=${majorsSearchValue}` : ''}`),
         enabled : false

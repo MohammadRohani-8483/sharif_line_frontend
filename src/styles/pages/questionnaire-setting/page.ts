@@ -115,7 +115,7 @@ export const PageHeaderButtons = styled.div`
   }
 
 `
-export const PageHeaderButton = styled.button<{ isActive?: boolean, loading?: boolean }>`
+export const PageHeaderButton = styled.button<{ $isActive?: boolean, $loading?: boolean }>`
   outline: none;
   background: none;
   border: none;
@@ -128,13 +128,13 @@ export const PageHeaderButton = styled.button<{ isActive?: boolean, loading?: bo
   border-right: 1px solid var(--grey-e);
   transition: 0.3s;
   cursor: pointer;
-  pointer-events: ${p => p.loading ? 'none' : 'all'};
+  pointer-events: ${p => p.$loading ? 'none' : 'all'};
 
   &:hover {
     background: var(--grey-e);
   }
 
-  background: ${p => p.isActive ? 'var(--grey-e)' : 'none'};
+  background: ${p => p.$isActive ? 'var(--grey-e)' : 'none'};
 
   & .headerButton {
     width: 30px;

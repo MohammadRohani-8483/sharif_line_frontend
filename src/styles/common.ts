@@ -2,14 +2,14 @@
 import styled from "styled-components";
 
 type ParentImageProps = {
-  w: number;
-  h: number;
-  sm_w?: number;
-  sm_h?: number;
-  md_w?: number;
-  md_h?: number;
-  lg_w?: number;
-  lg_h?: number;
+  $w: number;
+  $h: number;
+  $sm_w?: number;
+  $sm_h?: number;
+  $md_w?: number;
+  $md_h?: number;
+  $lg_w?: number;
+  $lg_h?: number;
 };
 
 export const PageCont = styled.main`
@@ -40,27 +40,27 @@ export const BlueBtn = styled.button`
   }
 `;
 
-export const Overlay = styled.div<{ zindex: number }>`
+export const Overlay = styled.div<{ $zIndex: number }>`
   position: fixed;
   inset: 0;
-  z-index: ${(p) => p.zindex};
+  z-index: ${(p) => p.$zIndex};
 `;
 
 export const ParentImage = styled.div<ParentImageProps>`
   position: relative;
-  width: ${(p) => p.w}px;
-  height: ${(p) => p.h}px;
+  width: ${(p) => p.$w}px;
+  height: ${(p) => p.$h}px;
   @media (min-width: 640px) {
-    width: ${(p) => p.sm_w || p.w}px;
-    height: ${(p) => p.sm_h || p.h}px;
+    width: ${(p) => p.$sm_w || p.$w}px;
+    height: ${(p) => p.$sm_h || p.$h}px;
   }
   @media (min-width: 768px) {
-    width: ${(p) => p.md_w || p.sm_w || p.w}px;
-    height: ${(p) => p.md_h || p.sm_h || p.h}px;
+    width: ${(p) => p.$md_w || p.$sm_w || p.$w}px;
+    height: ${(p) => p.$md_h || p.$sm_h || p.$h}px;
   }
   @media (min-width: 1024px) {
-    width: ${(p) => p.lg_w || p.md_w || p.sm_w || p.w}px;
-    height: ${(p) => p.lg_h || p.md_h || p.sm_h || p.h}px;
+    width: ${(p) => p.$lg_w || p.$md_w || p.$sm_w || p.$w}px;
+    height: ${(p) => p.$lg_h || p.$md_h || p.$sm_h || p.$h}px;
   }
 `;
 

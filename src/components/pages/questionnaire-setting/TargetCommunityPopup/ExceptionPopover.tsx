@@ -58,7 +58,7 @@ export const ExceptionPopover = ({ popoverOpen , setTargetData , exceptionKey , 
                                        animate={{ opacity : popoverOpen ? 1 : 0 }}
                                        transition={{ duration : 0.3 }}
                                        autoFocus={true}
-                                       open={popoverOpen}>
+                                       $open={popoverOpen}>
         <ExceptionInnerContainer>
             <Icon name={'UserId'} style={{opacity: 0.4}} width={24} height={24}/>
             <SearchInput placeholder={'کدملی'}

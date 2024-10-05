@@ -1,5 +1,5 @@
 import { T_TimerValue } from "@/src/components/pages/questionnaire-setting/QuestionnaireTimingSection";
-import { T_SetState } from "@/src/utils/types/global";
+import { T_Response, T_SetState } from "@/src/utils/types/global";
 import { UseQueryResult } from "@tanstack/react-query";
 import { AxiosResponse } from "axios/index";
 
@@ -53,11 +53,13 @@ export interface I_Communication {
   id: number;
   title: string;
 }
+
 export type T_ExceptionItem = {
   user: string | null;
   national_code: string;
   id: number;
 };
+
 export interface I_Condition {
   id: number;
   title: string;
@@ -72,26 +74,13 @@ export interface I_Condition {
   to_year: string | null;
 }
 
-export interface I_ApiConditionResponse {
-  count: number;
-  next: null | string;
-  previous: null | string;
-  results: I_Condition[];
-}
-
-export interface I_ApiCommunicationResponse {
-  count: number;
-  next: null | string;
-  previous: null | string;
-  results: I_Communication[];
-}
-
 export type T_QuestionnaireInitialDataType = {
   timer: T_TimerValue;
   is_active: boolean;
   title: string;
   is_required_login: boolean;
 };
+
 export type T_TargetCommunityPopupProp = {
   createMode: boolean;
   setSelectedConditions: T_SetState<I_Condition[]>;
@@ -101,8 +90,9 @@ export type T_TargetCommunityPopupProp = {
   conditions: I_Condition[];
   targetData: Omit<I_Condition, "id">;
   setTargetData: T_SetState<Omit<I_Condition, "id">>;
-  ConditionsQuery: UseQueryResult<AxiosResponse<I_ApiConditionResponse>>;
+  ConditionsQuery: UseQueryResult<AxiosResponse<T_Response<I_Condition>>>;
 };
+
 export type T_PopupFooter = {
   createMode: boolean;
   buttonText: string;
@@ -110,9 +100,10 @@ export type T_PopupFooter = {
   loading?: boolean;
   setCreateMode: T_SetState<boolean>;
 };
+
 export type T_TargetBoxProps = {
   targets: I_Condition[];
-  ConditionsQuery: UseQueryResult<AxiosResponse<I_ApiConditionResponse>>;
+  ConditionsQuery: UseQueryResult<AxiosResponse<T_Response<I_Condition>>>;
   questionnaireID: string;
   conditions: I_Condition[];
 };

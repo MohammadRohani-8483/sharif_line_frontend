@@ -76,7 +76,7 @@ const TemplatePopup: FC<TemplatePopupProps> = memo(({
                         :
                         <Body>
                             {templates.results.map(template => (
-                                <Template key={template.id} active={template.id === active} onClick={() => handleClick(template.id)}>
+                                <Template key={template.id} $active={template.id === active} onClick={() => handleClick(template.id)}>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: "8px" }}>
                                         <Title>
                                             <p>موضوع قالب</p>
@@ -157,18 +157,18 @@ const Body = styled.div`
     padding-bottom: 10px;
 `
 
-const Template = styled.div<{ active: boolean }>`
+const Template = styled.div<{ $active: boolean }>`
     padding: 16px;
     display: flex;
     width: 100%;
-    border: 1px solid ${p => p.active ? p.theme.colors.mainBack.main : p.theme.colors.neutral.e};
-    background-color: ${p => p.active ? p.theme.colors.mainBack.main : 'white'};
+    border: 1px solid ${p => p.$active ? p.theme.colors.mainBack.main : p.theme.colors.neutral.e};
+    background-color: ${p => p.$active ? p.theme.colors.mainBack.main : 'white'};
     border-radius: 8px;
     cursor: pointer;
 
     &:hover{
-        background-color: ${p => p.active ? p.theme.colors.mainBack.hover : p.theme.colors.neutral.hover};
-        border: 1px solid ${p => p.active ? p.theme.colors.mainBack.hover : p.theme.colors.neutral.hover};
+        background-color: ${p => p.$active ? p.theme.colors.mainBack.hover : p.theme.colors.neutral.hover};
+        border: 1px solid ${p => p.$active ? p.theme.colors.mainBack.hover : p.theme.colors.neutral.hover};
     }
 `
 

@@ -117,8 +117,8 @@ export const SideBarToggleButton = styled('div').withConfig({
   }
 `
 export const SideBarMask = styled.div.withConfig({
-    shouldForwardProp: prop => !['sidebaropen'].includes(prop)
-})<{ sidebaropen: boolean }>`
+    shouldForwardProp: prop => !['$sidebaropen'].includes(prop)
+})<{ $sidebaropen: boolean }>`
   position: fixed;
   display: none;
   width: 100%;
@@ -128,20 +128,20 @@ export const SideBarMask = styled.div.withConfig({
   cursor: pointer;
   @media screen and (max-width: ${theme.breakpoints.md}) {
     display: block;
-    z-index: ${p => p.sidebaropen ? 1 : -1};
-    opacity: ${p => p.sidebaropen ? 1 : 0};
+    z-index: ${p => p.$sidebaropen ? 1 : -1};
+    opacity: ${p => p.$sidebaropen ? 1 : 0};
     transition: 0.3s opacity;
   }
 `
-export const SideBarCloseItems = styled.div<{sidebaropen:boolean}>`
-  display: ${p => p.sidebaropen ? 'none' : 'flex'};
+export const SideBarCloseItems = styled.div<{$sidebaropen:boolean}>`
+  display: ${p => p.$sidebaropen ? 'none' : 'flex'};
   flex-direction: column;
   gap: 16px;
   align-items: center;
   justify-content: center;
   padding: 8px 0;
   transition: 0.3s;
-   opacity: ${p => p.sidebaropen ? 0 : 1};
+   opacity: ${p => p.$sidebaropen ? 0 : 1};
   > i {
     z-index: 2;
   }

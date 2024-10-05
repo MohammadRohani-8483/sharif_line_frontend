@@ -4,8 +4,8 @@ import {PopupProps} from "@/src/utils/types/global";
 import styled from "styled-components";
 
 interface BoxProps {
-    customStyles?: CSSProperties;
-    animation?: boolean;
+    $customStyles?: CSSProperties;
+    $animation?: boolean;
 };
 
 export default function Popup(p: PopupProps): JSX.Element {
@@ -27,10 +27,10 @@ export default function Popup(p: PopupProps): JSX.Element {
         
     }, [p.dismisable]);
     const children = typeof p.children === 'function' ? p.children(close) : p.children;
-    return <Container animation={animation} onClick={handleClose}>
-        <Overlay animation={animation} />
-        <BoxComponent customStyles={p.BoxStyle} className={p.className}
-            animation={animation}
+    return <Container $animation={animation} onClick={handleClose}>
+        <Overlay $animation={animation} />
+        <BoxComponent $customStyles={p.BoxStyle} className={p.className}
+            $animation={animation}
             onClick={handleBoxClick}>
             {/* <Scrollbar> */}
                 {children}
@@ -39,10 +39,10 @@ export default function Popup(p: PopupProps): JSX.Element {
     </Container>
 }
 
-const Container = styled.div<{ animation: boolean }>`
+const Container = styled.div<{ $animation: boolean }>`
     width: 100%;
     height: 100%;
-    opacity: ${p => p.animation ? 1 : 0};
+    opacity: ${p => p.$animation ? 1 : 0};
     transition: .3s opacity;
     display: flex;
     align-items: center;
@@ -58,20 +58,20 @@ const Container = styled.div<{ animation: boolean }>`
     }
 `;
 
-const Overlay = styled.div<{ animation: boolean }>`
+const Overlay = styled.div<{ $animation: boolean }>`
     position: absolute;
     width: 100vw;
     height: 100vh;
     top: 0;
     right: 0;
-    opacity: ${p => p.animation ? .3 : 0};
+    opacity: ${p => p.$animation ? .3 : 0};
     background: #000 !important;
     transition: .3s opacity;
 `;
 
-const Box = styled.div<BoxProps>(p => ({ ...p.customStyles }));
+const Box = styled.div<BoxProps>(p => ({ ...p.$customStyles }));
 const BoxComponent = styled(Box)`
-    transform: translateY(${p => p.animation ? '0' : '100vh'}) !important;
+    transform: translateY(${p => p.$animation ? '0' : '100vh'}) !important;
     border-radius: 24px;
     background: #fff !important;
     overflow: hidden;

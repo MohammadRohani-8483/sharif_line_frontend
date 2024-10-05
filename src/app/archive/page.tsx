@@ -7,7 +7,7 @@ import { Questionnaires } from '@/src/styles/pages/questionnaire'
 import { errorHandler } from '@/src/utils/functions/errorHandler'
 import { joinQueryStringParams } from '@/src/utils/functions/global'
 import { axiosInstance } from '@/src/utils/helper/axios'
-import { T_QuestionareList } from '@/src/utils/types/pages/questionnaire'
+import { T_QuestionnaireList } from '@/src/utils/types/pages/questionnaire'
 import { useEffect, useMemo, useState } from 'react'
 import { T_Response } from "@/src/utils/types/global";
 import { NotFoundSearchContainer, NotFoundTitle } from '@/src/styles/common/search-results'
@@ -19,7 +19,7 @@ const ArchivePage = () => {
   const [isLoad, setIsLoad] = useState(false)
   const [flag, setFlag] = useState(false)
 
-  const [data, setData] = useState<T_Response<T_QuestionareList> | null>(null)
+  const [data, setData] = useState<T_Response<T_QuestionnaireList> | null>(null)
 
   const [filter, setFilter] = useState({
     page: 1,
@@ -45,7 +45,7 @@ const ArchivePage = () => {
     if (typeof window !== 'undefined')
       document.getElementById('scroll')?.scrollTo({ top: 0, behavior: 'smooth' });
     setIsLoad(true)
-    axiosInstance().get<T_Response<T_QuestionareList>>(`question/archive/${queries}`)
+    axiosInstance().get<T_Response<T_QuestionnaireList>>(`question/archive/${queries}`)
       .then(res => {
         setData(res.data)
         setIsLoad(false)

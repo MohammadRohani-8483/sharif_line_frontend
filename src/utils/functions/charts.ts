@@ -1,6 +1,5 @@
 import { T_ChartData } from "../types/global";
 
-// import { T_ChartData } from "common-types";
 export type ChartResponse = {
   counts: number;
   percentages: number;

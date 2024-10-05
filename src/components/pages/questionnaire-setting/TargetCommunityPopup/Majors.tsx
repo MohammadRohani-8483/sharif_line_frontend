@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import {I_ApiCommunicationResponse, I_Communication, I_Condition} from "@/src/utils/types/pages/questionnaireSetting";
+import {I_Communication, I_Condition} from "@/src/utils/types/pages/questionnaireSetting";
 import {Icon} from "@/src/styles/common/icon";
 import Tick from "@/src/components/common/Tick";
-import {T_SetState} from "@/src/utils/types/global";
+import {T_Response, T_SetState} from "@/src/utils/types/global";
 import {TargetFieldPopover} from "@/src/components/pages/questionnaire-setting/TargetCommunityPopup/TargetFieldPopover";
 import {useEffect, useState} from "react";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
@@ -32,7 +32,7 @@ export const MajorsSection = ({
                               }: MajorsSectionProp) => {
 
     const [majorsSearchValue, setMajorsSearchValue] = useState<string>('');
-    const MajorsQuery: UseQueryResult<AxiosResponse<I_ApiCommunicationResponse>> = useQuery({
+    const MajorsQuery: UseQueryResult<AxiosResponse<T_Response<I_Condition>>> = useQuery({
         queryKey: ['MajorsQuery'],
         queryFn: async () => await axiosInstance().get(ENDPOINTS.MAJORS + `${majorsSearchValue ? `?search=${majorsSearchValue}` : ''}`),
         enabled : false ,
@@ -43,7 +43,7 @@ export const MajorsSection = ({
         MajorsQuery.refetch();
     }, [majorsSearchValue]);
     return MajorsQuery.data?.data &&
-        <ConditionCheckBoxSection open={majorCheckBox} style={{padding: 0}} targetHeight={'auto'}>
+        <ConditionCheckBoxSection $open={majorCheckBox} style={{padding: 0}} $targetHeight={'auto'}>
             <ConditionCBInnerContainer>
                 <ConditionCheckboxTitle onClick={() => {
                     if (majorCheckBox)
@@ -54,7 +54,7 @@ export const MajorsSection = ({
                     <Tick active={majorCheckBox} />
                     <p>رشته تحصیلی</p>
                 </ConditionCheckboxTitle>
-                <AddConditionButton background={'white'} disabled={!majorCheckBox} onClick={() => setPopoverOpen(!popoverOpen)}>
+                <AddConditionButton $background={'white'} disabled={!majorCheckBox} onClick={() => setPopoverOpen(!popoverOpen)}>
                     <Icon name={'plus'} style={{ transform: popoverOpen ? 'rotate(45deg)' : 'none' , opacity : majorCheckBox ? 1 : 0.6}}
                           width={15} height={15}/>
                 </AddConditionButton>

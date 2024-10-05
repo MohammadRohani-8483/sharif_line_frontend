@@ -4,12 +4,11 @@ import {Icon} from "@/src/styles/common/icon";
 import styled from "styled-components";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {axiosInstance} from "@/src/utils/helper/axios";
-import {T_InputEvent} from "@/src/utils/types/global";
+import {T_InputEvent, T_Response} from "@/src/utils/types/global";
 import {AxiosResponse} from "axios";
-import {I_ApiQuestionnaireList} from "@/src/utils/types/pages/questionnaire";
+import {T_QuestionnaireList} from "@/src/utils/types/pages/questionnaire";
 import {SearchResults} from "@/src/components/common/LayoutComponents/SearchResults";
 import {SpinnerLoading} from "@/src/components/common/SpinnerLoading";
-import {closePopup} from "@/src/utils/functions/global";
 
 export const HeaderSearchBar = () => {
     let searchTimeOut: ReturnType<typeof setTimeout>
@@ -17,7 +16,7 @@ export const HeaderSearchBar = () => {
     const inputRef = useRef<HTMLInputElement | null>(null);
     const [searchResultOpen, setSearchResultOpen] = useState(false);
     const searchBoxRef = useRef<HTMLDivElement | null>(null);
-    const SearchQuery: UseQueryResult<AxiosResponse<I_ApiQuestionnaireList>> = useQuery({
+    const SearchQuery: UseQueryResult<AxiosResponse<T_Response<T_QuestionnaireList>>> = useQuery({
         queryKey: ['SearchQuery'],
         enabled: searchValue !== null,
         queryFn: async () => await axiosInstance().get(`/question/archive?${searchValue ? 'title=' + searchValue : ''}`)

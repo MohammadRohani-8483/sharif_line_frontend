@@ -2,7 +2,6 @@
 import Loading from "@/src/app/loading";
 import Button from "@/src/components/common/Button";
 import { HeaderQuestionnaire } from "@/src/components/common/HeaderQuestionnaire";
-import { SpinnerLoading } from "@/src/components/common/SpinnerLoading";
 import Status from "@/src/components/common/Status";
 import Tick from "@/src/components/common/Tick";
 import { TimerCalculator } from "@/src/components/pages/questionnaire-setting/QuestionnaireTimingSection";
@@ -25,10 +24,11 @@ import {
 } from "@/src/styles/pages/settingVersion";
 import { errorHandler } from "@/src/utils/functions/errorHandler";
 import { axiosInstance } from "@/src/utils/helper/axios";
+import { T_Response } from "@/src/utils/types/global";
 import { I_GroupData } from "@/src/utils/types/pages/questionnaire";
 import {
-  I_ApiConditionResponse,
   I_ApiQSSettingResponse,
+  I_Condition,
 } from "@/src/utils/types/pages/questionnaireSetting";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
@@ -93,7 +93,7 @@ export default function ClientSettingVersion(p: {
     queryKey: ["ConditionQuery"],
     enabled: false,
     queryFn: async () =>
-      await axiosInstance().get<I_ApiConditionResponse>(
+      await axiosInstance().get<T_Response<I_Condition>>(
         `/question/condition${
           searchParams.get("search")
             ? "?search=" + searchParams.get("search")
@@ -121,10 +121,10 @@ export default function ClientSettingVersion(p: {
           : {
               active_version: versionData?.version,
             };
-      const url =
-        questionnaireUrl + type === "activate"
-          ? `/questionnaire/${params.id}`
-          : "";
+      const url = `${questionnaireUrl}/${
+        type === "update" ? `questionnaire/${params.id}` : ""
+      }`;
+      console.log(url);
       await axiosInstance().patch(url, patchData);
       await groupRefetch();
       await versionRefetch();

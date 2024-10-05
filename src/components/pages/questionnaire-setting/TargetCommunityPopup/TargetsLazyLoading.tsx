@@ -1,5 +1,5 @@
-import {I_ApiConditionResponse, I_Condition} from "@/src/utils/types/pages/questionnaireSetting";
-import {T_SetState} from "common-types";
+import {I_Condition} from "@/src/utils/types/pages/questionnaireSetting";
+import {T_SetState} from "@/src/utils/types/global";
 import React, {useEffect, useState} from "react";
 import {
     TargetCommunityItemComponent
@@ -9,6 +9,7 @@ import {axiosInstance} from "@/src/utils/helper/axios";
 import {useSearchParams} from "next/navigation";
 import {AxiosError, AxiosResponse} from "axios";
 import {errorHandler} from "@/src/utils/functions/errorHandler";
+import { T_Response } from "@/src/utils/types/global";
 
 type T_TargetLazyLoading = {
     targetsList : I_Condition[] ,
@@ -31,7 +32,7 @@ export const TargetsLazyLoading = (props : T_TargetLazyLoading) => {
     const fetchMoreTargets = async () => {
         try {
             setLoading(true)
-            let { data } : AxiosResponse<I_ApiConditionResponse> = await axiosInstance().get(`/question/condition?page=${page + 1}${searchParams.get('search') ?
+            let { data } : AxiosResponse<T_Response<I_Condition>> = await axiosInstance().get(`/question/condition?page=${page + 1}${searchParams.get('search') ?
                 '&search=' + searchParams.get('search') : '' }`)
             setTargetsList((prevState) => [...prevState , ...data.results])
             setPage(page + 1);

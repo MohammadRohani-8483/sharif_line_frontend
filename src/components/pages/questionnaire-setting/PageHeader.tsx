@@ -5,7 +5,6 @@ import {LogoutPopup} from "@/src/components/common/LayoutComponents/LogoutPopup"
 import {useMutation} from "@tanstack/react-query";
 import {axiosInstance} from "@/src/utils/helper/axios";
 import {toast} from "react-toastify";
-
 import {Tooltip} from "@/src/components/common/Tooltip";
 import {
     PageHeader,
@@ -14,7 +13,6 @@ import {
     PageHeaderTitle
 } from "@/src/styles/pages/questionnaire-setting/page";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 
 type T_QuestionnaireHeader = {
     questionnaireGroupID : string ,
@@ -59,9 +57,7 @@ export const QuestionnaireSettingPageHeader = (props :T_QuestionnaireHeader) => 
                 window.location.pathname = '/'
             },300);
         }
-
     }
-
 
     return <PageHeader>
         <PageHeaderTitle>
@@ -93,10 +89,6 @@ export const QuestionnaireSettingPageHeader = (props :T_QuestionnaireHeader) => 
                     <Icon name={'trash_red'} width={24} height={24} />
                 </PageHeaderButton>
             </Tooltip>
-
-
-            {/*</Tooltip>*/}
-
         </PageHeaderButtons>
     </PageHeader>
 }

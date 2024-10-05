@@ -20,7 +20,7 @@ export const LayoutMainHeaderComponent = ({ setSideBarOpen , sideBarOpen } : Lay
     if(pathname.includes('/answer')) return <></>
     if(pathname.includes('/payment')) return <></>
     return <LayoutMainHeader id='headerbar'>
-        <SideBarMask sidebaropen={sideBarOpen} onClick={() => setSideBarOpen(false)} />
+        <SideBarMask $sidebaropen={sideBarOpen} onClick={() => setSideBarOpen(false)} />
         <LayoutHeaderTopPart>
             <HeaderToggleButton onClick={() => setSideBarOpen(true)}>
                 <Icon name={'menu'} width={24} height={24} />

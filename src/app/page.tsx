@@ -1,6 +1,6 @@
 "use client";
 import { axiosInstance } from "@/src/utils/helper/axios";
-import { T_QuestionareList } from "../utils/types/pages/questionnaire";
+import { T_QuestionnaireList } from "../utils/types/pages/questionnaire";
 import Questionnaire from "@/src/components/pages/questionnaire-list/Questionnaire";
 import { useEffect, useMemo, useState } from "react";
 import { orderingItems } from "../utils/staticData/orderingItems";
@@ -33,7 +33,7 @@ const Page = () => {
 
   const [reverseOrder, setReverseOrder] = useState(true);
   const [mode, setMode] = useState<T_Mode>("MIXED");
-  const [data, setData] = useState<T_Response<T_QuestionareList> | null>(null);
+  const [data, setData] = useState<T_Response<T_QuestionnaireList> | null>(null);
 
   const [filter, setFilter] = useState({
     page: 1,
@@ -60,7 +60,7 @@ const Page = () => {
         ?.scrollTo({ top: 0, behavior: "smooth" });
     setIsLoad(true);
     axiosInstance()
-      .get<T_Response<T_QuestionareList>>(`question/archive/${queries}`)
+      .get<T_Response<T_QuestionnaireList>>(`question/archive/${queries}`)
       .then((res) => {
         setData(res.data);
         setIsLoad(false);

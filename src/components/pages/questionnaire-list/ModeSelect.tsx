@@ -11,7 +11,7 @@ type Props = {
 
 const ModeSelect = ({ active, icon, onClick }: Props) => {
     return (
-        <Container active={active} onClick={onClick}>
+        <Container $active={active} onClick={onClick}>
             <ReactSVG src={`/images/svg/${icon}.svg`} />
         </Container>
     )
@@ -19,18 +19,18 @@ const ModeSelect = ({ active, icon, onClick }: Props) => {
 
 export default ModeSelect
 
-const Container = styled.div<{ active?: boolean }>`
+const Container = styled.div<{ $active?: boolean }>`
     cursor: pointer;
     padding: 10px;
     border-radius: 6px;
-    border: 1px solid ${p => !p.active ? "#eee" : p.theme.colors.main};
-    background: ${p => !p.active ? "#fff" : p.theme.colors.main};
+    border: 1px solid ${p => !p.$active ? "#eee" : p.theme.colors.main};
+    background: ${p => !p.$active ? "#fff" : p.theme.colors.main};
     width: 46px;
     height: 46px;
 
     &:hover{
-        border: 1px solid ${p => !p.active ? "#eee" : p.theme.colors.hover_main};
-        background: ${p => !p.active ? p.theme.colors.neutral.hover : p.theme.colors.hover_main};
+        border: 1px solid ${p => !p.$active ? "#eee" : p.theme.colors.hover_main};
+        background: ${p => !p.$active ? p.theme.colors.neutral.hover : p.theme.colors.hover_main};
     }
 
     div{
@@ -38,7 +38,7 @@ const Container = styled.div<{ active?: boolean }>`
         width: 24px;
 
         path{
-            fill: ${p => p.active ? 'white' : "black"};
+            fill: ${p => p.$active ? 'white' : "black"};
         }
     }
 `

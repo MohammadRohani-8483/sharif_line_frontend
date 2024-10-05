@@ -1,10 +1,10 @@
 import { Container, Item, LinkItem } from "@/src/styles/components/popupMenu";
 import { errorHandler } from "@/src/utils/functions/errorHandler";
 import { closePopup } from "@/src/utils/functions/global";
-import { isOpen } from "@/src/utils/types/global";
-import { T_QuestionareList } from "@/src/utils/types/pages/questionnaire";
+import { isOpen, T_SetState } from "@/src/utils/types/global";
+import { T_QuestionnaireList } from "@/src/utils/types/pages/questionnaire";
 import { axiosInstance } from '@/src/utils/helper/axios'
-import { Dispatch, SetStateAction, useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import { Icon } from "@/src/styles/common/icon";
 import { ModalContext } from "@/src/utils/contexts/ModalContext";
@@ -12,8 +12,8 @@ import { LogoutPopup } from "@/src/components/common/LayoutComponents/LogoutPopu
 
 type Props = {
     open: isOpen
-    questionnaire: T_QuestionareList
-    setOpen: Dispatch<SetStateAction<isOpen>>
+    questionnaire: T_QuestionnaireList
+    setOpen: T_SetState<isOpen>
     setFlag: () => void
 }
 

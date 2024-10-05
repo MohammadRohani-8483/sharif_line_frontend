@@ -93,7 +93,7 @@ export const CreateTargetButton = styled.div`
       filter: var(--Main-filter);
   }
 `
-export const TargetCommunityItem = styled.div<{ selected?: boolean }>`
+export const TargetCommunityItem = styled.div<{ $selected?: boolean }>`
   display: flex;
   padding: 16px;
   justify-content: flex-start;
@@ -102,7 +102,7 @@ export const TargetCommunityItem = styled.div<{ selected?: boolean }>`
   gap: 10px;
   align-self: stretch;
   border-radius: 8px;
-  border: 1px solid ${p => p.selected ? 'var(--Main)' : 'var(--grey-e)'};
+  border: 1px solid ${p => p.$selected ? 'var(--Main)' : 'var(--grey-e)'};
   background: var(--gray-fa);
   color: var(--sidebar-bg);
   font-size: 1.6rem;
@@ -120,28 +120,28 @@ export const SearchInput = styled.input`
     font-weight: 400;
   }
 `
-export const AddConditionButton = styled.button<{ background?: string, bordercolor?: string, disabled?: boolean }>`
+export const AddConditionButton = styled.button<{ $background?: string, $bordercolor?: string, disabled?: boolean }>`
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: ${p => p.background ? p.background : 'var(--gray-fa)'};
+  background: ${p => p.$background ? p.$background : 'var(--gray-fa)'};
   cursor: pointer;
-  border: 1px solid ${p => p.bordercolor ? p.bordercolor : 'var(--grey-e)'};
+  border: 1px solid ${p => p.$bordercolor ? p.$bordercolor : 'var(--grey-e)'};
   border-radius: 8px;
   pointer-events: ${p => p.disabled ? 'none' : 'all'};
 `
-export const ConditionCheckBoxSection = styled.div<{ open: boolean, targetHeight: number | string }>`
+export const ConditionCheckBoxSection = styled.div<{ $open: boolean, $targetHeight: number | string }>`
   display: flex;
   flex-direction: column;
-  height: ${p => p.open ? p.targetHeight : '40px'};
+  height: ${p => p.$open ? p.$targetHeight : '40px'};
   padding: 10px 0;
   justify-content: flex-start;
   gap: 10px;
   flex-shrink: 0;
   align-self: stretch;
-  overflow: ${p => p.open ? 'visible' : 'hidden'};
+  overflow: ${p => p.$open ? 'visible' : 'hidden'};
   transition: 0.3s;
 `
 export const ConditionCBInnerContainer = styled.div`
@@ -170,13 +170,13 @@ export const NoTargetContainer = styled.div`
   justify-content: center;
   margin: 32px 0;
 `
-export const CommunityPopoverContainer = styled(motion.div)<{ open: boolean }>`
+export const CommunityPopoverContainer = styled(motion.div)<{ $open: boolean }>`
   position: absolute;
   left: 0;
   top: 50px;
   transition: opacity 0.3s;
-  opacity: ${p => p.open ? 1 : 0};
-  z-index: ${p => p.open ? 2 : -1};
+  opacity: ${p => p.$open ? 1 : 0};
+  z-index: ${p => p.$open ? 2 : -1};
   width: 240px;
   display: flex;
   padding: 8px;
@@ -262,7 +262,7 @@ export const SearchTargetInputContainer = styled.div`
   border: 1px solid var(--grey-e);
   background: white;
 `
-export const CommunityItemContainer = styled.div<{ active: boolean }>`
+export const CommunityItemContainer = styled.div<{ $active: boolean }>`
   display: flex;
   padding: 8px;
   justify-content: flex-start;
@@ -272,11 +272,10 @@ export const CommunityItemContainer = styled.div<{ active: boolean }>`
   border: 1px solid var(--grey-e);
   background: var(--gray-fa);
   transition: 0.3s;
-  color: ${p => p.active ? 'var(--Main)' : '#333'};
+  color: ${p => p.$active ? 'var(--Main)' : '#333'};
   font-size: 1.6rem;
   cursor: pointer;
   border-radius: 8px;
-  
 `
 export const SelectedCommunicationItem = styled.div`
   height: 40px;

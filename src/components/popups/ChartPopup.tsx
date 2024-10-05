@@ -1,16 +1,15 @@
 import { Item } from "@/src/styles/components/popupMenu";
-import { isOpen } from "@/src/utils/types/global";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { isOpen, T_SetState } from "@/src/utils/types/global";
+import { useEffect } from "react";
 import { ContainerPopup } from "@/src/styles/components/chartContainer";
 import chartIcons from '@/src/utils/jsons/chartIcons.json'
 import { chartType } from "../pages/statistics/ChartContainer";
 import { closePopup } from "@/src/utils/functions/global";
-import { Icon } from "@/src/styles/common/icon";
 import { ReactSVG } from "react-svg";
 
 type Props = {
-  open: isOpen, setOpen: Dispatch<SetStateAction<isOpen>>
-  setType: Dispatch<SetStateAction<chartType>>
+  open: isOpen, setOpen: T_SetState<isOpen>
+  setType: T_SetState<chartType>
   activeType: chartType
 }
 

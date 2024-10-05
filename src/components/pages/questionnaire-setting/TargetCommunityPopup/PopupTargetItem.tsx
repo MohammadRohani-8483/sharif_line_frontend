@@ -19,7 +19,7 @@ export const TargetCommunityItemComponent = ({TargetItem, conditions ,selectedCo
         });
     };
 
-    return <TargetCommunityItem selected={selectedConditions.some((SelectedItem) => SelectedItem.id === TargetItem.id)}
+    return <TargetCommunityItem $selected={selectedConditions.some((SelectedItem) => SelectedItem.id === TargetItem.id)}
                                 onClick={() => {
                                     handleConditionClick(TargetItem);
                                 }}>

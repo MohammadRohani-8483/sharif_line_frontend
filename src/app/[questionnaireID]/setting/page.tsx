@@ -13,7 +13,6 @@ import { useMutation, useQuery, UseQueryResult } from "@tanstack/react-query";
 import { axiosInstance } from "@/src/utils/helper/axios";
 import { AxiosError, AxiosResponse } from "axios";
 import {
-    I_ApiConditionResponse,
     I_ApiQSSettingResponse,
     I_Condition, T_QuestionnaireInitialDataType
 } from "@/src/utils/types/pages/questionnaireSetting";
@@ -27,6 +26,7 @@ import { TimeSectionLoading } from "@/src/components/pages/questionnaire-setting
 import { questionnaireInitialData } from "@/src/utils/staticData/questionnaireSetting";
 import { TargetSectionLoading } from "@/src/components/pages/questionnaire-setting/loading/TargetSectionLoading";
 import { PageContainer, PageFooter } from "@/src/styles/pages/questionnaire-setting/page";
+import { T_Response } from "@/src/utils/types/global";
 
 const QuestionnaireSetting = ({ params }: { params: { questionnaireID: string } }) => {
     const searchParams = useSearchParams();
@@ -46,7 +46,7 @@ const QuestionnaireSetting = ({ params }: { params: { questionnaireID: string } 
             return Response;
         },
     })
-    const ConditionsQuery: UseQueryResult<AxiosResponse<I_ApiConditionResponse, any>> = useQuery({
+    const ConditionsQuery: UseQueryResult<AxiosResponse<T_Response<I_Condition>, any>> = useQuery({
         queryKey: ['ConditionQuery'],
         enabled: false,
         queryFn: async () =>

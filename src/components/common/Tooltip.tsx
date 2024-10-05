@@ -18,15 +18,11 @@ export const Tooltip = ({children, anchorClassName, placement, title , clickable
         <ToolTipComponent anchorSelect={'.' + anchorClassName}
                           clickable={clickable}
                           render={() => {
-                              return <TooltipBody placement={placement ? placement : 'bottom'} className={'tooltip-body'}>
+                              return <TooltipBody className={'tooltip-body'}>
                                   <Icon className={'tooltip-svg'} name={'tooltip-svg'} width={80} height={80}/>
                                   <div className={'tooltip-content'}>{title}</div>
                               </TooltipBody>
                           }}
-            // children={<TooltipBody placement={placement}>
-            //     <Icon name={'tooltip-svg'} width={80} height={80} />
-            //     <div className={'tooltip-content'}>{title}</div>
-            // </TooltipBody>}
                           style={{background: 'none' , zIndex : 999999}}
                           place={placement} noArrow={true}
         />
@@ -35,8 +31,7 @@ export const Tooltip = ({children, anchorClassName, placement, title , clickable
 }
 
 
-const TooltipBody = styled.div<{ placement: PlacesType }>`
-  //--rt-opacity : 1 !important;
+const TooltipBody = styled.div`
   min-height: 41px;
   min-width: 136px;
   max-width: 200px;
@@ -63,12 +58,6 @@ const TooltipBody = styled.div<{ placement: PlacesType }>`
     z-index: 1;
     top: -15px;
     height: 40px;
-      // top: ${p => (p.placement === 'right' || p.placement === 'left') ? '50%' : '-15px'};
-      // left: ${p => p.placement === 'right' ? '-35px' : p.placement === 'left' ? 'unset' : '50%'};
-      // right: ${p => p.placement === 'left' ? '-35px' : 'unset'};
-      // transform: ${p => p.placement === 'right' || p.placement === 'left' ? 'translateY(-50%) rotate(-90deg)' : 'translateX(-50%)'};
-    // z-index: 1;
-      // height: ${p => p.placement === 'right' || p.placement === 'left' ? '30px' : '40px'};
   }
 
   & .tooltip-content {
@@ -76,8 +65,3 @@ const TooltipBody = styled.div<{ placement: PlacesType }>`
     z-index: 2;
   }
 `
-// transform: translateY(-50%) rotate(-90deg);
-// top: 50%;
-// left: -35px;
-// height: 30px;
-

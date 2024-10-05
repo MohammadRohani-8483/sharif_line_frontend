@@ -38,7 +38,7 @@ export const TargetFieldPopover = (props : TargetFieldPopoverProp) => {
         }
     }, [props.popoverOpen]);
 
-    return <CommunityPopoverContainer ref={popOverRef} autoFocus={true} open={props.popoverOpen}>
+    return <CommunityPopoverContainer ref={popOverRef} autoFocus={true} $open={props.popoverOpen}>
         <PopoverSearchBox>
             { props.searchLoading ? <SpinnerLoading color={'var(--gray-c)'} width={24} height={24} /> :
                 <Icon name={'search'} style={{opacity: 0.3}} width={24} height={24}/>}
@@ -53,7 +53,7 @@ export const TargetFieldPopover = (props : TargetFieldPopoverProp) => {
         </PopoverSearchBox>
         {props.availableList.map((Item: I_Communication) =>
             <CommunityItemContainer onClick={() => props.updateListData(props.listData, Item)}
-                                    active={props.listData ? props.listData.some((TItem => TItem.id === Item.id)) : false}
+                                    $active={props.listData ? props.listData.some((TItem => TItem.id === Item.id)) : false}
                                     key={Item.id}>
                 {Item.title}
             </CommunityItemContainer>)}

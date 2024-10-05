@@ -1,4 +1,4 @@
-export type T_QuestionareList = {
+export type T_QuestionnaireList = {
   id: string;
   title: string;
   group_created_at: string;
@@ -9,12 +9,6 @@ export type T_QuestionareList = {
   group_id: number;
   group_slug: string;
 };
-export interface I_ApiQuestionnaireList {
-  count: number;
-  next: null | string;
-  previous: null | string;
-  results: T_QuestionareList[];
-}
 
 export type T_Version = {
   id: string; // uuid
@@ -26,6 +20,7 @@ export type T_Version = {
 export interface I_GroupData {
   id: number; // group_id
   is_active: boolean;
+  group_slug: string;
   active_version: number; // version
   versions: T_Version[];
 }
