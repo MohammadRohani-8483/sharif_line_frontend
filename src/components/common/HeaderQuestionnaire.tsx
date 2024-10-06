@@ -17,10 +17,7 @@ import {
 import Link from "next/link";
 import { useSearchParams, usePathname, useParams } from "next/navigation";
 import Dropdown from "./Dropdown";
-import {
-  I_GroupData,
-  T_Version,
-} from "@/src/utils/types/pages/questionnaire";
+import { I_GroupData, T_Version } from "@/src/utils/types/pages/questionnaire";
 
 type Props = {
   title: string;
@@ -146,7 +143,7 @@ export const HeaderQuestionnaire = (p: Props) => {
             </Tooltip>
           </Link>
         )}
-        <Link href={`/${questionnaireId}/answer`}>
+        <Link href={`/${p.groupData?.group_slug || ""}/answer`}>
           <Tooltip
             title={"مشاهده"}
             placement={"bottom"}
