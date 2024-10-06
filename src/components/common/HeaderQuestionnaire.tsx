@@ -156,7 +156,7 @@ export const HeaderQuestionnaire = (p: Props) => {
         </Link>
         {params.id ? (
           <Tooltip
-            title={"حذف پرشنامه"}
+            title={"حذف پرسشنامه"}
             anchorClassName={"delete-button-anchor"}
             placement={"bottom"}
           >
