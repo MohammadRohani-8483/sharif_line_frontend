@@ -147,9 +147,9 @@ export const HeaderQuestionnaire = (p: Props) => {
           <Tooltip
             title={"مشاهده"}
             placement={"bottom"}
-            anchorClassName={"activate-button-anchor"}
+            anchorClassName={"showItem"}
           >
-            <PageHeaderButton className={"activate-button-anchor"}>
+            <PageHeaderButton className={"showItem"}>
               <Icon name={"eye"} width={24} height={24} />
             </PageHeaderButton>
           </Tooltip>
