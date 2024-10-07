@@ -28,11 +28,13 @@ import { questionnaireInitialData } from "@/src/utils/staticData/questionnaireSe
 import { TargetSectionLoading } from "@/src/components/pages/questionnaire-setting/loading/TargetSectionLoading";
 import { PageContainer, PageFooter } from "@/src/styles/pages/questionnaire-setting/page";
 
-const QuestionnaireSetting = ({ params }: { params: { questionnaireID: string } }) => {
+const QuestionnaireSetting = ({ params }: { params: { questionnaireID: string, Id:string } }) => {
+    
+    
     const searchParams = useSearchParams();
     const [timeSelectorCheckbox, setTimeSelectorCheckbox] = useState(false);
     const [questionnaireData, setQuestionnaireData] = useState<T_QuestionnaireInitialDataType>(questionnaireInitialData);
-    const questionnaireURL = `/question/group-questionnaire/${searchParams.get('group_id')}/questionnaire/${params.questionnaireID}`
+    const questionnaireURL = `/question/group-questionnaire/${params.Id}/questionnaire/${params.questionnaireID}`
     const QSSettingQuery: UseQueryResult<AxiosResponse<I_ApiQSSettingResponse, AxiosError>> = useQuery({
         queryKey: ['QSSettingQuery'],
         queryFn: async () => {
@@ -70,7 +72,7 @@ const QuestionnaireSetting = ({ params }: { params: { questionnaireID: string } 
             errorHandler(Error.response);
         }
     })
-    if (!searchParams.get('group_id') || QSSettingQuery.isError)
+    if (!params.Id || QSSettingQuery.isError)
         return <QuestionnaireNotFound />
 
 

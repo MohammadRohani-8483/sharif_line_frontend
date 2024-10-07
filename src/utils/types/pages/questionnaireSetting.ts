@@ -47,6 +47,33 @@ export interface I_ApiQSSettingResponse {
     "is_active": boolean
     "group_slug": string
 }
+export interface I_ApiLinkResponse {
+    "count": number,
+    "next": null | string,
+    "previous": null | string,
+    "results": I_Link[]
+}
+export interface I_Link {
+    link: string
+    token: string
+    is_used: boolean
+    created_at: string
+  }
+  export type T_Group_idInitialDataType = {
+    id: number
+    group_slug: string
+    is_active: boolean
+    active_version: number
+    versions: T_Version[]
+    title:string
+  }
+  
+  export interface T_Version {
+    id: string
+    version: number
+    created_at: string
+    description:string
+  }
 
 export interface I_Communication {
     "id": number,

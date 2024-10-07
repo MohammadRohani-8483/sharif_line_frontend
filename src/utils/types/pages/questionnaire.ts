@@ -21,6 +21,7 @@ export interface I_ApiQuestionnaireList {
 export type T_Version = {
     id: string // uuid
     version: number
+    description:string
     created_at: string
 }
 

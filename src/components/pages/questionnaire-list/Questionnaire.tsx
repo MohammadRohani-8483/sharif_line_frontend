@@ -88,7 +88,7 @@ const Questionnaire = ({ mode, data, setFlag, isArchive, setSearchNull }: { mode
                                 </Link>
                             </Tooltip>
                             <Tooltip title='تنظیمات' anchorClassName={'setting-' + data.id} placement={'bottom'} >
-                                <Link href={`/${data.id}/setting?group_id=${data.group_id}`} className={'settingButton setting-' + data.id} onClick={setSearchNull}>
+                                <Link href={`/setting/${data.group_id}/`} className={'settingButton setting-' + data.id} onClick={setSearchNull}>
                                     <Icon name='settings' width={24} height={24} />
                                 </Link>
                             </Tooltip>
