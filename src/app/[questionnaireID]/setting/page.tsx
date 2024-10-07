@@ -1,128 +1,211 @@
-'use client'
-
-import { SaveButton } from "@/src/styles/pages/questionnaire-setting";
+"use client";
+import Paginate from "@/src/components/common/Paginate";
+import DisposableLink from "@/src/components/pages/questionnaire-setting/TargetCommunityPopup/DisposableLink/DisposableLink";
+import Version from "@/src/components/pages/questionnaire-setting/version/Version";
 import {
-    QuestionnaireSettingPageHeader,
-} from "@/src/components/pages/questionnaire-setting/PageHeader";
-import {
-    QuestionnaireTimingSection, TimerCalculator
-} from "@/src/components/pages/questionnaire-setting/QuestionnaireTimingSection";
-import { TargetCommunitySection } from "@/src/components/pages/questionnaire-setting/TargetCommunitySection";
-import { useSearchParams } from "next/navigation";
-import { useMutation, useQuery, UseQueryResult } from "@tanstack/react-query";
+  QuestionnaireTimingContainer,
+  QuestionnaireTitle,
+  TimingSection,
+} from "@/src/styles/pages/questionnaire-setting/page";
 import { axiosInstance } from "@/src/utils/helper/axios";
-import { AxiosError, AxiosResponse } from "axios";
-import {
-    I_ApiQSSettingResponse,
-    I_Condition, T_QuestionnaireInitialDataType
-} from "@/src/utils/types/pages/questionnaireSetting";
-import { QuestionnaireNotFound } from "@/src/components/pages/questionnaire-setting/QuestionnaireNotFound";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { errorHandler } from "@/src/utils/functions/errorHandler";
-import { SpinnerLoading } from "@/src/components/common/SpinnerLoading";
-import { SettingHeadeLoading } from "@/src/components/pages/questionnaire-setting/loading/SettingHeaderLoading";
-import { TimeSectionLoading } from "@/src/components/pages/questionnaire-setting/loading/TimeSectionLoading";
-import { questionnaireInitialData } from "@/src/utils/staticData/questionnaireSetting";
-import { TargetSectionLoading } from "@/src/components/pages/questionnaire-setting/loading/TargetSectionLoading";
-import { PageContainer, PageFooter } from "@/src/styles/pages/questionnaire-setting/page";
 import { T_Response } from "@/src/utils/types/global";
+import {
+  I_Link,
+  T_Group_idInitialDataType,
+} from "@/src/utils/types/pages/questionnaireSetting";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { AxiosError, AxiosResponse } from "axios";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import styled from "styled-components";
 
-const QuestionnaireSetting = ({ params }: { params: { questionnaireID: string } }) => {
-    const searchParams = useSearchParams();
-    const [timeSelectorCheckbox, setTimeSelectorCheckbox] = useState(false);
-    const [questionnaireData, setQuestionnaireData] = useState<T_QuestionnaireInitialDataType>(questionnaireInitialData);
-    const questionnaireURL = `/question/group-questionnaire/${searchParams.get('group_id')}/questionnaire/${params.questionnaireID}`
-    const QSSettingQuery: UseQueryResult<AxiosResponse<I_ApiQSSettingResponse, AxiosError>> = useQuery({
-        queryKey: ['QSSettingQuery'],
-        queryFn: async () => {
-            let Response: AxiosResponse<I_ApiQSSettingResponse, any> = await axiosInstance().get(questionnaireURL);
-            setQuestionnaireData({
-                timer: TimerCalculator(Response.data.duration) as any,
-                title: Response.data.title,
-                is_active: Response.data.is_active,
-                is_required_login: Response.data.is_required_login
-            })
-            return Response;
-        },
-    })
-    const ConditionsQuery: UseQueryResult<AxiosResponse<T_Response<I_Condition>, any>> = useQuery({
-        queryKey: ['ConditionQuery'],
-        enabled: false,
-        queryFn: async () =>
-            await axiosInstance().get(`/question/condition${searchParams.get('search') ?
-                '?search=' + searchParams.get('search') : ''}`),
-    })
-    useEffect(() => {
-        ConditionsQuery.refetch()
-    }, [searchParams.toString()]);
-    const UpdateQuestionnaireQuery = useMutation({
-        mutationFn: async () => await axiosInstance().patch(questionnaireURL, {
-            duration: timeSelectorCheckbox ? Object.values(questionnaireData.timer).join(':') : null,
-            is_active: questionnaireData.is_active,
-            title: questionnaireData.title,
-            is_required_login: questionnaireData.is_required_login
-        }),
-        onSuccess: () => {
-            toast.success('ذخیره شد')
-        },
-        onError: (Error: AxiosError) => {
-            errorHandler(Error.response);
-        }
-    })
-    if (!searchParams.get('group_id') || QSSettingQuery.isError)
-        return <QuestionnaireNotFound />
+export default function Page({
+  params,
+}: {
+  params: { questionnaireID: string };
+}) {
+  const [DisposableLinkData, setDisposableLinkData] =
+    useState<T_Response<I_Link>>();
+  const [activeVersion, setActiveVersion] = useState<number>();
+  const [isLoginRequired, setIsLoginRequired] = useState(false);
+  const [title, setQuestionnaireTitle] = useState("");
+  const [activeOrNot, setQuestionnaireActive] = useState(true);
 
+  const questionnaireURL = `/question/group-questionnaire/${params.questionnaireID}`;
+  let LinkURL = `/answer/answerlink/${params.questionnaireID}`;
 
-    return <PageContainer>
-        {
-            QSSettingQuery.isLoading ? <>
-                <SettingHeadeLoading />
-                <TimeSectionLoading />
-                <TargetSectionLoading />
-            </> : QSSettingQuery.data?.data && <>
-                <QuestionnaireSettingPageHeader questionnaireID={QSSettingQuery.data.data.group_slug}
-                    title={questionnaireData.title}
-                    setIsActive={() => {
-                        setQuestionnaireData((prevState) =>
-                            ({ ...prevState, is_active: !prevState.is_active }))
-                    }}
-                    isActive={questionnaireData.is_active}
-                    questionnaireGroupID={searchParams.get('group_id') as string} />
-                <QuestionnaireTimingSection questionnaireTimer={QSSettingQuery.data.data.duration}
-                    timerCheckBox={[timeSelectorCheckbox, setTimeSelectorCheckbox]}
-                    timerValue={questionnaireData.timer}
-                    setQuestionnaireTitle={(NewTitle: string) => {
-                        setQuestionnaireData((prevState) => ({
-                            ...prevState, title: NewTitle
-                        }))
-                    }}
-                    setTimerValue={(value: number, time: 'second' | 'hour' | 'minute') => {
-                        setQuestionnaireData((prevState) =>
-                            ({ ...prevState, timer: { ...prevState.timer, [time]: value } }))
-                    }}
-                    title={questionnaireData.title} />
-                {ConditionsQuery.isLoading ? <TargetSectionLoading /> : QSSettingQuery.data?.data &&
-                    <TargetCommunitySection targets={QSSettingQuery.data.data.conditions}
-                        ConditionsQuery={ConditionsQuery}
-                        questionnaireID={params.questionnaireID}
-                        setIsLoginRequired={(Value: boolean) => {
-                            setQuestionnaireData((prevState) => ({
-                                ...prevState, is_required_login: Value
-                            }))
-                        }}
-                        conditions={ConditionsQuery.data!.data.results as I_Condition[]}
-                        isLoginRequired={questionnaireData.is_required_login} />
-                }
-                <PageFooter>
-                    <SaveButton onClick={() => UpdateQuestionnaireQuery.mutate()}>
-                        {UpdateQuestionnaireQuery.isPending ?
-                            <SpinnerLoading color={'white'} width={20} height={20} /> : <p>ذخیره</p>}
-                    </SaveButton>
-                </PageFooter>
-            </>
-        }
-    </PageContainer>
+  const changePage = (page: number) => {
+    LinkURL = `/answer/answerlink/${params.questionnaireID}` + "/?page=" + page;
+    QSLinkQuery.refetch();
+  };
+
+  const QSLinkQuery: UseQueryResult<
+    AxiosResponse<T_Response<I_Link>, AxiosError>
+  > = useQuery({
+    queryKey: ["QSLinkQuery"],
+    queryFn: async () => {
+      let Response: AxiosResponse<
+        T_Response<I_Link>,
+        any
+      > = await axiosInstance().get(LinkURL);
+      setDisposableLinkData(Response.data);
+      return Response;
+    },
+  });
+
+  const PatchHandler = async () => {
+    let Response: AxiosResponse<T_Group_idInitialDataType, any> =
+      await axiosInstance().patch(questionnaireURL, {
+        is_active: activeOrNot,
+        active_version: activeVersion,
+        title: title,
+        is_required_login: isLoginRequired,
+      });
+    if (Response.status == 200) {
+      toast("با موفقیت تغییر کرد");
+    }
+
+    setQuestionnaireActive(Response.data.is_active);
+    setActiveVersion(Response.data.active_version);
+  };
+  return (
+    <ContainerQuestionnairePage>
+      <QuestionnaireTimingContainer>
+        <TimingSection className={"titleSection"}>
+          <p className={"regular-title"}>نام پرسشنامه</p>
+          <QuestionnaireTitle>
+            <input
+              placeholder={""}
+              value={title}
+              className={"questionnaireNameInput"}
+              onChange={(Event) => setQuestionnaireTitle(Event.target.value)}
+            />
+          </QuestionnaireTitle>
+        </TimingSection>
+        <TimingSection className={"statusSection"}>
+          <p className={"regular-title"}>وضعیت پرسشنامه</p>
+          <StatusQuestionnaire active={activeOrNot}>
+            <button
+              onClick={() => {
+                setQuestionnaireActive(true);
+              }}
+              className="active"
+            >
+              <p>فعال</p>
+            </button>
+            <button
+              onClick={() => {
+                setQuestionnaireActive(false);
+              }}
+              className="unactive"
+            >
+              <p>غیرفعال</p>
+            </button>
+          </StatusQuestionnaire>
+        </TimingSection>
+      </QuestionnaireTimingContainer>
+      <CommunityStatus>
+        <DisposableLink
+          group_id={params.questionnaireID}
+          data={DisposableLinkData?.results}
+          status={true}
+        />
+        <div className="space"></div>
+        <Paginate
+          activePage={1}
+          pageSize={12}
+          itemsCount={DisposableLinkData?.count || 0}
+          setPage={(page) => changePage(page)}
+        />
+      </CommunityStatus>
+      <Version
+        setActiveVersion={(number: number) => setActiveVersion(number)}
+        activeVersion={activeVersion}
+      />
+      <div className="btnMain">
+        <button onClick={() => PatchHandler()} className="BTNsave">
+          <p>ذخیره</p>
+        </button>
+      </div>
+    </ContainerQuestionnairePage>
+  );
 }
 
-export default QuestionnaireSetting;
+const ContainerQuestionnairePage = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0 32px;
+  gap: 16px;
+  @media screen and (max-width: 800px) {
+    padding: 0 16px;
+  }
+  .statusSection {
+    width: clamp(200px, 23%, 400px);
+  }
+  .titleSection {
+    min-width: 300px;
+  }
+  .btnMain {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 32px;
+  }
+  .BTNsave {
+    cursor: pointer;
+    display: flex;
+    padding: 8px 64px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 4px;
+    background: var(--Main, #2979ff);
+    p {
+      color: #fff;
+    }
+  }
+  .space {
+    height: 8px;
+  }
+`;
+
+const CommunityStatus = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+`;
+
+const StatusQuestionnaire = styled.div<{ active: boolean }>`
+  width: 100%;
+  display: flex;
+  background-color: #ffffff;
+  height: 53px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-E, #eee);
+  overflow: hidden;
+  p {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .active {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 500ms;
+    background-color: ${(p) => (p.active ? "#2979ff" : "#ffffff")};
+    p {
+      color: ${(p) => (p.active ? "#fff" : "#333")};
+    }
+  }
+  .unactive {
+    transition: background 500ms;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background-color: ${(p) => (!p.active ? "#2979ff" : "#ffffff")};
+    color: ${(p) => (!p.active ? "#fff" : "#333")};
+    justify-content: center;
+  }
+`;
