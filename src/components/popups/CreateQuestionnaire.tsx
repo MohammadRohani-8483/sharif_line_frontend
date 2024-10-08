@@ -23,10 +23,8 @@ const CreateQuestionnaire = memo(({ onClose, open, id, setFlag }: Props) => {
   const { isPending, mutate } = useMutation({
     mutationFn: async (data: Object) => {
       if (data) {
-        
         let body: { form: Object; id?: string } = { form: data };
         if (id) body.id = id;
-
         await axiosInstance().post("question/form/", body);
       }
     },
