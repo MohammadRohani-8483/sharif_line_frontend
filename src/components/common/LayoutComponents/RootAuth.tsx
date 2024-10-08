@@ -41,7 +41,9 @@ export const RootAuthorization = ({
         dispatch(setProfile({ user: res?.data }));
         setAuthorized(true);
       })
-      .catch(() => setAuthorized(false))
+      .catch((err) => {
+        console.log(err)
+        setAuthorized(false)})
       .finally(() => setLoading(false));
     return () => {
       dispatch(setToken({ access: null, refresh: null }));

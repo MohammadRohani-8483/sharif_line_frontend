@@ -73,7 +73,7 @@ export const TargetComponent = ({ targetData , setAddTargetModalProp ,setEditCon
                     },60)
                 }
 
-            }} bordercolor={'#FCC8C8'} background={'rgba(255, 0, 0, 0.08)'}>
+            }} $bordercolor={'#FCC8C8'} $background={'rgba(255, 0, 0, 0.08)'}>
                 <Icon name={'TrashBinMinimalistic'} width={24} height={24} />
             </AddConditionButton>
             <AddConditionButton onClick={() => {
@@ -82,7 +82,7 @@ export const TargetComponent = ({ targetData , setAddTargetModalProp ,setEditCon
                 setEditConditionID(targetData.id);
                 setTargetData();
                 openModal();
-            }} bordercolor={'#CCC'} background={'#EEE'}>
+            }} $bordercolor={'#CCC'} $background={'#EEE'}>
                 <Icon name={'pen'} width={24} height={24} />
             </AddConditionButton>
         </div>

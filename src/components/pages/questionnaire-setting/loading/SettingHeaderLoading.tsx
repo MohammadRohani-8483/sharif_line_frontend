@@ -16,14 +16,13 @@ export const SettingHeadeLoading = () => {
             <h2 className={'headerTitle'}>loadng yum yum nigga</h2>
         </PageHeaderTitle>
         <PageHeaderButtons>
-            <PageHeaderButton loading={true}>
+            <PageHeaderButton $loading={true}>
                 <span className={'headerButton'}></span>
             </PageHeaderButton>
-            <PageHeaderButton loading={true}>
+            <PageHeaderButton $loading={true}>
                 <span className={'headerButton'}></span>
-                {/*<Icon name={isActive ? 'eye' : 'eye_closed'} width={24} height={24} />*/}
             </PageHeaderButton>
-            <PageHeaderButton loading={true} className={'deleteButton'}>
+            <PageHeaderButton $loading={true} className={'deleteButton'}>
                 <span className={'headerButton'}></span>
             </PageHeaderButton>
         </PageHeaderButtons>

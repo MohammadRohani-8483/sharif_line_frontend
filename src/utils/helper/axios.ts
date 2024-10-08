@@ -19,7 +19,7 @@ export const axiosInstance = (token?: Tokens) => {
     instance.interceptors.response.use(function (response: AxiosResponse) {
         return response;
     }, async function (error: AxiosError) {
-        if (!error.response || isServer)
+        if (!error.response || isServer) 
             return Promise.reject(error);
         switch (error.response.status) {
             case 401:

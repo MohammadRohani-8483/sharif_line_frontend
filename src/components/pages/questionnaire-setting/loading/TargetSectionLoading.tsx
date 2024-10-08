@@ -29,10 +29,10 @@ export const TargetSectionLoading = () => {
                 <TargetItemContainer>
                     <LoadingText>dfhdfhdfhkljklkj</LoadingText>
                     <div className={'target-buttons'}>
-                        <AddConditionButton bordercolor={'#FCC8C8'} background={'rgba(255, 0, 0, 0.08)'}>
+                        <AddConditionButton $bordercolor={'#FCC8C8'} $background={'rgba(255, 0, 0, 0.08)'}>
                             <LoadingIcon width={24} height={24} background={'#d1d1d1'} />
                         </AddConditionButton>
-                        <AddConditionButton  bordercolor={'#CCC'} background={'#EEE'}>
+                        <AddConditionButton  $bordercolor={'#CCC'} $background={'#EEE'}>
                             <LoadingIcon width={24} height={24} background={'#ffc9c9'} />
                         </AddConditionButton>
                     </div>

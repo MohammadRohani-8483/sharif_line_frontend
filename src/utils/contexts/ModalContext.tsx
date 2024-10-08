@@ -1,6 +1,6 @@
 import React, {CSSProperties, useState} from "react";
 import {FadePopup} from "@/src/components/popups/FadePopup";
-import {T_SetState} from "common-types";
+import {T_SetState} from "@/src/utils/types/global";
 
 type T_DefaultModalProps = {
     modalTitle? : string,

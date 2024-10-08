@@ -41,7 +41,7 @@ export const LayoutSidebar = ({sideBarOpen}: {
     return <SideBarElement id="sidebar" sidebaropen={sideBarOpen}>
         <SideBarContainer>
             <SideBarHead sidebaropen={sideBarOpen}>
-                <SideBarCloseItems sidebaropen={sideBarOpen}>
+                <SideBarCloseItems $sidebaropen={sideBarOpen}>
                     <Icon url={`${defaultIconURL}sideBarSVGs/`} name={'CsideBarTitle'}
                           width={59} height={52} className={'closedSideBarIcon'} style={{marginRight:16}}/>
                     <SideBarHomeItem>

@@ -1,12 +1,11 @@
-import { Dispatch, SetStateAction } from "react";
-import { isOpen, T_ShowTooltip } from "../types/global";
+import { isOpen, T_SetState, T_ShowTooltip } from "../types/global";
 
-export const closePopup = (setIsOpen: Dispatch<SetStateAction<isOpen>>) => {
+export const closePopup = (setIsOpen: T_SetState<isOpen>) => {
     setIsOpen(p => ({ ...p, visible: false }));
     setTimeout(() => setIsOpen(p => ({ ...p, open: false })), 300)
 }
 
-export const hideTooltip = (setIsShow: Dispatch<SetStateAction<T_ShowTooltip>>) => {
+export const hideTooltip = (setIsShow: T_SetState<T_ShowTooltip>) => {
     setIsShow(p => ({ ...p, visible: false }));
     setTimeout(() => setIsShow(p => ({ ...p, axis: null })), 300)
 }

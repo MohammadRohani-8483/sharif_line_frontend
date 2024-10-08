@@ -62,7 +62,7 @@ export const AddTargetCommunity = ({targetData, setTargetData}:
                            updateCommunicationsData={(_, Communication: I_Communication) =>
                                updateListHandler('communication', Communication)
                            }/>
-        <ConditionCheckBoxSection open={genderCheckbox} targetHeight={'102px'}>
+        <ConditionCheckBoxSection $open={genderCheckbox} $targetHeight={'102px'}>
             <ConditionCheckboxTitle onClick={() => {
                 if (genderCheckbox)
                     setTargetData(prevState => ({...prevState, gender: null}))
@@ -78,7 +78,7 @@ export const AddTargetCommunity = ({targetData, setTargetData}:
                            updateListHandler('major', Major)}
                        majorCheckBox={majorCheckBox} setTargetData={setTargetData}
                        targetMajor={targetData.major as I_Communication[]}/>
-        <ConditionCheckBoxSection open={entryYearCheckbox} targetHeight={'102px'}>
+        <ConditionCheckBoxSection $open={entryYearCheckbox} $targetHeight={'102px'}>
             <ConditionCheckboxTitle onClick={() => {
                 if (entryYearCheckbox)
                     setTargetData(prevState => ({...prevState, from_year: null, to_year: null}))

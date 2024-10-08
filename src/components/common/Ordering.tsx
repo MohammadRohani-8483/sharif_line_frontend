@@ -1,6 +1,5 @@
 'use client'
-import {T_OrderingItem} from "@/src/utils/types/global";
-import { Dispatch, SetStateAction } from 'react'
+import {T_OrderingItem, T_SetState} from "@/src/utils/types/global";
 import { OrderContain, OrderItem, OrderTitle } from '@/src/styles/components/ordering'
 import { Icon } from "@/src/styles/common/icon";
 
@@ -9,7 +8,7 @@ type Props = {
     active: T_OrderingItem
     setActive: (active: T_OrderingItem) => void
     reverse: boolean
-    setReverse: Dispatch<SetStateAction<boolean>>
+    setReverse: T_SetState<boolean>
 }
 
 const Ordering = (p: Props) => {

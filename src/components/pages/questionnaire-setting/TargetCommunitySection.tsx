@@ -5,7 +5,6 @@ import {useEffect, useState} from "react";
 import Tick from "@/src/components/common/Tick";
 import {TargetCommunityBox} from "@/src/components/pages/questionnaire-setting/TargetCommunityBox";
 import {I_Condition} from "@/src/utils/types/pages/questionnaireSetting";
-import {T_SetState} from "common-types";
 import {UseQueryResult} from "@tanstack/react-query";
 import {Accordion} from "@/src/components/common/Accordion";
 import {TargetCommunityContainer} from "@/src/styles/pages/questionnaire-setting/page";

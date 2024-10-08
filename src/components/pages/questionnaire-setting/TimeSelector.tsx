@@ -11,7 +11,7 @@ import {
     TimeOptionsContainer,
     TimeSelectorContainer
 } from "@/src/styles/pages/questionnaire-setting/page";
-import {T_SetState} from "common-types";
+import {T_SetState} from "@/src/utils/types/global";
 
 type setTimerValueType = (value: number, key: 'minute' | 'hour' | 'second') => void
 type TimeSelectorProp = {

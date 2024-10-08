@@ -2,7 +2,7 @@
 import MultiRangeSlider, {ChangeResult} from "multi-range-slider-react";
 import {useEffect, useRef, useState} from "react";
 import styled from "styled-components";
-import {T_SetState} from "common-types";
+import {T_SetState} from "@/src/utils/types/global";
 import {I_Condition} from "@/src/utils/types/pages/questionnaireSetting";
 
 

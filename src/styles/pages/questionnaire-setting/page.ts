@@ -1,3 +1,4 @@
+'use client'
 import styled from "styled-components";
 import theme from "@/src/styles/theme";
 
@@ -61,6 +62,44 @@ export const PageHeaderTitle = styled.div`
     } 
   }
 `
+
+export const PageHeaderCont=styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  padding: 8px 16px;
+  gap: 16px;
+  
+  @media (min-width: ${theme.breakpoints.lg}) {
+    flex-direction: row;
+    align-items: center;
+  }
+`
+export const TitleCont=styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  gap: 4px;
+  flex: 1 0 0;
+  padding: 8px 0;
+
+  > p {
+    color: var(--gray-6);
+    font-size: 1.2rem;
+    font-weight: 300;
+  }
+  
+  > h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--sidebar-bg);
+  }
+`
+
 export const PageHeaderButtons = styled.div`
   display: flex;
   justify-content: center;
@@ -76,7 +115,7 @@ export const PageHeaderButtons = styled.div`
   }
 
 `
-export const PageHeaderButton = styled.button<{ isActive?: boolean, loading?: boolean }>`
+export const PageHeaderButton = styled.button<{ $isActive?: boolean, $loading?: boolean }>`
   outline: none;
   background: none;
   border: none;
@@ -89,13 +128,13 @@ export const PageHeaderButton = styled.button<{ isActive?: boolean, loading?: bo
   border-right: 1px solid var(--grey-e);
   transition: 0.3s;
   cursor: pointer;
-  pointer-events: ${p => p.loading ? 'none' : 'all'};
+  pointer-events: ${p => p.$loading ? 'none' : 'all'};
 
   &:hover {
     background: var(--grey-e);
   }
 
-  background: ${p => p.isActive ? 'var(--grey-e)' : 'none'};
+  background: ${p => p.$isActive ? 'var(--grey-e)' : 'none'};
 
   & .headerButton {
     width: 30px;
@@ -129,6 +168,7 @@ export const TimingSection = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
+  width: 100%;
 
   &.titleSection {
     flex: 1 0 0;
