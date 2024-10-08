@@ -2,6 +2,7 @@
 import Loading from "@/src/app/loading";
 import Button from "@/src/components/common/Button";
 import { HeaderQuestionnaire } from "@/src/components/common/HeaderQuestionnaire";
+import { SpinnerLoading } from "@/src/components/common/SpinnerLoading";
 import Status from "@/src/components/common/Status";
 import Tick from "@/src/components/common/Tick";
 import { TimerCalculator } from "@/src/components/pages/questionnaire-setting/QuestionnaireTimingSection";
@@ -45,7 +46,7 @@ export default function ClientSettingVersion(p: {
 
   const questionnaireUrl = useMemo(
     () => `question/group-questionnaire/${params.questionnaireID}`,
-    [params]
+    [params.questionnaireID]
   );
 
   const [timeSelectorCheckbox, setTimeSelectorCheckbox] = useState(false);
@@ -55,6 +56,9 @@ export default function ClientSettingVersion(p: {
     desc: p.versionData?.description || "",
   });
   const [selectorAppear, setSelectorAppear] = useState(false);
+  const [updateType, setUpdateType] = useState<"update" | "activate" | null>(
+    null
+  );
 
   const {
     data: groupData,
@@ -109,6 +113,7 @@ export default function ClientSettingVersion(p: {
 
   const UpdateQuestionnaireQuery = useMutation({
     mutationFn: async (type: "activate" | "update") => {
+      setUpdateType(type);
       const patchData =
         type === "update"
           ? {
@@ -124,7 +129,6 @@ export default function ClientSettingVersion(p: {
       const url = `${questionnaireUrl}/${
         type === "update" ? `questionnaire/${params.id}` : ""
       }`;
-      console.log(url);
       await axiosInstance().patch(url, patchData);
       await groupRefetch();
       await versionRefetch();
@@ -167,9 +171,13 @@ export default function ClientSettingVersion(p: {
               <Status isActive={isActiveVersion} />
             </div>
             <Button
+              $colorMode="reversed"
               disabled={isActiveVersion}
               style={{ width: "100%", height: 44 }}
               onClick={() => UpdateQuestionnaireQuery.mutate("activate")}
+              $isLoading={
+                UpdateQuestionnaireQuery.isPending && updateType === "activate"
+              }
             >
               تنظیم به عنوان فعال
             </Button>
@@ -240,13 +248,17 @@ export default function ClientSettingVersion(p: {
         isLoginRequired={data.isRequiredLogin}
       />
       <PageFooter>
-        <SaveButton onClick={() => UpdateQuestionnaireQuery.mutate("update")}>
-          <p>ذخیره</p>
-        </SaveButton>
+        <Button
+          onClick={() => UpdateQuestionnaireQuery.mutate("update")}
+          style={{ padding: "8px 64px", borderRadius: 4, fontWeight: 700 }}
+          $isLoading={
+            UpdateQuestionnaireQuery.isPending && updateType === "update"
+          }
+        >
+          ذخیره
+        </Button>
       </PageFooter>
-      {(UpdateQuestionnaireQuery.isPending ||
-        groupLoading ||
-        versionLoading) && (
+      {(groupLoading || versionLoading) && (
         <div
           style={{
             position: "absolute",
