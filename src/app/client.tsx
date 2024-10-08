@@ -33,11 +33,11 @@ export default function ClientLayout(p: {
       <QueryClientProvider client={queryClient}>
         <ModalContextProvider>
           <ThemeProvider theme={theme}>
-            {/* <OidcProvider> */}
-            <RootAuthorization tokens={p.tokens}>
-              <RootLayout pathname={pathname}>{p.children}</RootLayout>
-            </RootAuthorization>
-            {/* </OidcProvider> */}
+            <OidcProvider>
+              <RootAuthorization tokens={p.tokens}>
+                <RootLayout pathname={pathname}>{p.children}</RootLayout>
+              </RootAuthorization>
+            </OidcProvider>
           </ThemeProvider>
         </ModalContextProvider>
       </QueryClientProvider>

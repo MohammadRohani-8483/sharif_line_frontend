@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
 import Loading from "./loading";
 import ErrorComp from "./ErrorComp";
+import SsoRedirect from "../components/common/SsoRedirect";
 
 const configuration: Oidc.OidcConfiguration = {
   client_id: `${process.env.NEXT_PUBLIC_SSO_CLIENT}`,
@@ -29,7 +30,7 @@ export default function OidcProvider({ children }: { children: ReactNode }) {
   const withCustomHistory: () => CustomHistory = () => {
     return {
       replaceState: (url) => {
-        console.log(url)
+        console.log(url);
         router.replace(url || "");
         window.dispatchEvent(new Event("popstate"));
       },
@@ -38,11 +39,12 @@ export default function OidcProvider({ children }: { children: ReactNode }) {
 
   return (
     <Oidc.OidcProvider
+      authenticatingComponent={() => <SsoRedirect type="forth" />}
       configuration={configuration}
       onEvent={onEvent}
       withCustomHistory={withCustomHistory}
       loadingComponent={Loading}
-      callbackSuccessComponent={() => children}
+      callbackSuccessComponent={() => <SsoRedirect type="back" />}
       authenticatingErrorComponent={() => (
         <ErrorComp statusCode={401} message="شما احراز هویت نشده اید." />
       )}
