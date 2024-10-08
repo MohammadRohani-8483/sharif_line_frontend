@@ -75,6 +75,12 @@ export interface I_Link {
     created_at: string
     description:string
   }
+  export interface I_ApiConditionResponse {
+    "count": number,
+    "next": null | string,
+    "previous": null | string,
+    "results": I_Condition[]
+}
 
 export interface I_Communication {
   id: number;

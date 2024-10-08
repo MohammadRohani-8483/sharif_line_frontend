@@ -7,16 +7,21 @@ import closeBtn from '@/public/images/svg/close.svg'
 import { AxiosResponse } from 'axios'
 import { axiosInstance } from '@/src/utils/helper/axios'
 import { toast } from 'react-toastify'
+import { SpinnerLoading } from '../common/SpinnerLoading'
 function AddDisposableLinkPopup(props:{visible:boolean, onClose:()=>void,group_id:string}) {
 let [createLinkNumberState,setCreateLinkNumberState]=useState<number>(1)
+let [loading,setLoadingState]=useState<boolean>(false)
 let addHandler = async ()=>{
+  setLoadingState(true)
   let Response: AxiosResponse<{detail:string}, any> = await axiosInstance().post('/answer/answerlink/',{ 
     group_id: props.group_id,
     num_links: createLinkNumberState
   });
   if(Response.status==201 ){
-    toast(' با موفقیت افزوده شد')
+    toast.success(' با موفقیت افزوده شد')
   }
+  setLoadingState(false)
+
   props.onClose()
 }
   return (
@@ -24,7 +29,7 @@ let addHandler = async ()=>{
 <AddDisposableLinkPopupMain>
     <div className="nonebox"></div>
 <Topic><p>ایجاد لینک یکبار مصرف</p>
-<CloseBtn>
+<CloseBtn  onClick={()=>props.onClose()}>
 
 <Image src={closeBtn} alt='دکمه بسته شدن'></Image>
 </CloseBtn>
@@ -55,7 +60,14 @@ let addHandler = async ()=>{
 <button onClick={()=>setCreateLinkNumberState(Number(createLinkNumberState+1000))} className="BTNadd">۱۰۰۰+</button>
 </BoxAddGroup>
 <AcceptBox>
-  <button onClick={()=>addHandler()}><p>افزودن</p></button>
+  <button onClick={()=>addHandler()}>
+    
+    {loading?
+   <SpinnerLoading color={'white'} width={20} height={20}/>:
+   <p>افزودن</p>
+
+  }
+    </button>
 </AcceptBox>
 </AddDisposableLinkPopupMain>
     </Popup>

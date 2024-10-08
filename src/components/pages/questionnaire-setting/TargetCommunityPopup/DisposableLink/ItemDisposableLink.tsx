@@ -8,7 +8,7 @@ import { I_Link } from '@/src/utils/types/pages/questionnaireSetting'
 import { convertDate } from '@/src/utils/functions/global'
 function ItemDisposableLink(props:{className?:string,key:number, index:number , data:I_Link}) {
     let copyLinkHandler = ()=>{
-        navigator.clipboard.writeText(props.data.link);
+        navigator?.clipboard?.writeText(props.data.link);
         toast.success('با موفقیت کپی شد')
     }
     
@@ -17,7 +17,7 @@ function ItemDisposableLink(props:{className?:string,key:number, index:number , 
           <div className="item"><p>{props.index}</p></div>
     <div className="item"><p>{convertDate(props.data.created_at)}</p></div>
     <div className="item"><StatusDisposableLink status={props.data.is_used?'used':'unused'}/></div>
-    <div className="item"><ItemDisposableLinkCopyBTN onClick={copyLinkHandler}><Image alt='کپی ایکون' src={copySvgIcon}></Image></ItemDisposableLinkCopyBTN><p>{props.data.token}</p></div>
+    <div className="item"><ItemDisposableLinkCopyBTN onClick={copyLinkHandler}><Image alt='کپی ایکون' src={copySvgIcon}></Image></ItemDisposableLinkCopyBTN><p>{props.data.link}</p></div>
     </ItemDisposableLinkMain>
   )
 }
