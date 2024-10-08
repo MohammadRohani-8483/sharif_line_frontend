@@ -10,7 +10,8 @@ import Image from 'next/image'
 import { T_Version } from '@/src/utils/types/pages/questionnaire'
 import { convertDate } from '@/src/utils/functions/global'
 import Link from 'next/link'
-function ItemVersion(props:{data:T_Version,setActiveVersion:any; isActive:boolean}) {
+import { Tooltip } from '@/src/components/common/Tooltip'
+function ItemVersion(props:{data:T_Version,qroup_id:string,setActiveVersion:any; isActive:boolean}) {
 
   return (
     <ItemVersionStyle className='itemVersion'>
@@ -31,13 +32,20 @@ function ItemVersion(props:{data:T_Version,setActiveVersion:any; isActive:boolea
     <Image alt='فعال کردن پرسشنامه' src={CheckSquareBlack}></Image>
 }
     </BTNactive>
-   <BTN href={''}>
+   <Tooltip
+              title={"مشاهده"}
+              anchorClassName={"chart"}
+              placement={"bottom"}
+            >
+
+   <BTN href={`/21`}>
     <Image alt='مشاهده' src={eye}></Image>
     </BTN>
-   <BTN href={''}>
+            </Tooltip>
+   <BTN target='_blank' href={`/${props.data.id}/statistics?group_id=${props.qroup_id}&result_stage=true`}>
     <Image alt='نتایج' src={documentText}></Image>
     </BTN>
-   <BTN href={''}>
+   <BTN  target='_blank' href={`/${props.data.id}/statistics?group_id=${props.qroup_id}`}>
     <Image alt='چارت' src={chart}></Image>
     </BTN>
     <BTN href={`${window.location.href}/${props.data.id}`}>

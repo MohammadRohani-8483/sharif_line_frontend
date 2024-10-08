@@ -5,7 +5,7 @@ function StatusDisposableLink(props:{status:"used" | "unused"}) {
   return (
     <StatusDisposableLinkMain status={props.status}>
       <div className="boxColor"></div>
-      <p className='pStatusDisposable'>{props.status? 'استفاده نشده':"استفاده شده"}</p>
+      <p className='pStatusDisposable'>{props.status=='unused'?'استفاده نشده':"استفاده شده"}</p>
     </StatusDisposableLinkMain>
   )
 }

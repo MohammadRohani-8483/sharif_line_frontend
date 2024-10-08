@@ -5,13 +5,13 @@ import AddSquare from '@/public/images/svg/AddSquare.svg'
 import ItemVersion from './ItemVersion'
 import { T_Version } from '@/src/utils/types/pages/questionnaire'
 
-function Version(props:{data?:T_Version[] | undefined  ;setActiveVersion:(number:number)=>void; activeVersion:number | undefined}) {
+function Version(props:{data?:T_Version[] | undefined  ; qroup_id:string ;setActiveVersion:(number:number)=>void; activeVersion:number | undefined; addClick:()=>void}) {
   return (
     <ContainerVersion>
 <Topic>
 
       <p className='title'>نسخه های پرسشنامه</p>
-      <button>
+      <button onClick={props.addClick}>
         <p>افزودن</p>
         <Image alt='افزودن' src={AddSquare}></Image>
       </button>
@@ -25,7 +25,7 @@ function Version(props:{data?:T_Version[] | undefined  ;setActiveVersion:(number
     <div className="item"><p>توضیحات</p></div>
 
 </TopicTable>
-{props.data?.map((item)=><ItemVersion setActiveVersion={props.setActiveVersion} isActive={props.activeVersion == item.version} data={item}/>)}
+{props.data?.map((item)=><ItemVersion qroup_id={props.qroup_id} setActiveVersion={props.setActiveVersion} isActive={props.activeVersion == item.version} data={item}/>)}
 
 </TableVersion>
 </TableVersionContainer>
@@ -58,6 +58,7 @@ align-items: center;
 width: 100%;
 justify-content: space-between;
 button{
+    cursor: pointer;
     display: flex;
 padding: 8px;
 justify-content: center;

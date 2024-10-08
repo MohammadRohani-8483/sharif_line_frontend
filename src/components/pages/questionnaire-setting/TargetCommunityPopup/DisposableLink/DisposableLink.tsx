@@ -1,36 +1,42 @@
 import { Buttons } from '@/src/styles/pages/questionnaire'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import DownloadMinimalistic from '@/public/images/svg/Download Minimalistic.svg'
 import AddSquare from '@/public/images/svg/AddSquare.svg'
 import ItemDisposableLink from './ItemDisposableLink'
 import AddDisposableLinkPopup from '@/src/components/popups/AddDisposableLink'
 import { I_Link } from '@/src/utils/types/pages/questionnaireSetting'
-function DisposableLink(props:{status:boolean,data:I_Link[] | undefined,group_id:string}) {
-    let [popupLinkState,setPopupLinkState ]= useState(false)
-    let exportExel = ()=>{
-        window.open(` /api/answer/answerlink/${props.group_id}/export_to_excel`, '_blank');
-       
+function DisposableLink(props:{status:boolean,data:I_Link[] | undefined,group_id:string, onClose:()=>void,statusPopup:boolean}) {
+let [exportExel,setExportExel]=useState(false)
+   
+    let exportExelHandler = ()=>{
+     
+        setExportExel(true)
+    setTimeout(()=>{
+        setExportExel(false)
+
+    },100)
     }
+
   return (
     <DisposableLinkMain status={props.status}>
-        {popupLinkState?
-        
-        <AddDisposableLinkPopup group_id={props.group_id} onClose={()=>setPopupLinkState(false)} visible={popupLinkState}  ></AddDisposableLinkPopup>
+
+        {props.statusPopup?
+        <AddDisposableLinkPopup group_id={props.group_id} onClose={()=>props.onClose()} visible={props.statusPopup}  ></AddDisposableLinkPopup>
     :null}
 
 <TopicDisposableLink   >
 
-      <p className='title'>لینک یبار مصرف</p>
+      <p className='title'>لینک یک‌‌‌بار مصرف</p>
       <BtnsBox>
 
 
-      <ExportDisposableLinkBTN onClick={()=>exportExel()}>
+      <ExportDisposableLinkBTN onClick={()=>exportExelHandler()}>
          <Image  alt='خروجی اکسل' src={DownloadMinimalistic} ></Image>
         <p>خروجی اکسل</p>
          </ExportDisposableLinkBTN>
-         <CreateDisposableLinkBTN onClick={()=>setPopupLinkState(true)}>
+         <CreateDisposableLinkBTN onClick={()=>props.onClose()}>
          <Image  alt='خروجی اکسل' src={AddSquare} ></Image>
          <p>ایجاد لینک</p>
          </CreateDisposableLinkBTN>
@@ -53,6 +59,9 @@ function DisposableLink(props:{status:boolean,data:I_Link[] | undefined,group_id
 
 </TableDisposableLink>
 </TableVersionContainer>
+{exportExel?
+        <iframe height={0} src={`/api/answer/answerlink/${props.group_id}/export_to_excel`} ></iframe>
+        :null}
     </DisposableLinkMain>
   )
 }
