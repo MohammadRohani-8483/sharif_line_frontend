@@ -11,7 +11,7 @@ import { cookies, headers } from "next/headers";
 import NextTopLoader from "nextjs-toploader";
 
 
-const baseAppTitle = 'پرس افراز شریف';
+const baseAppTitle = 'پرس افزار شریف';
 
 export const metadata: Metadata = {
     icons: [{ rel: 'icon', url: '/images/svg/logo.svg' }],

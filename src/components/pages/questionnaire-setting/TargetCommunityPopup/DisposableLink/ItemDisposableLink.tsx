@@ -17,7 +17,7 @@ function ItemDisposableLink(props:{className?:string,key:number, index:number , 
           <div className="item"><p>{props.index}</p></div>
     <div className="item"><p>{convertDate(props.data.created_at)}</p></div>
     <div className="item"><StatusDisposableLink status={props.data.is_used?'used':'unused'}/></div>
-    <div className="item"><ItemDisposableLinkCopyBTN onClick={copyLinkHandler}><Image alt='کپی ایکون' src={copySvgIcon}></Image></ItemDisposableLinkCopyBTN><p>{props.data.link}</p></div>
+    <div className="item"><ItemDisposableLinkCopyBTN onClick={copyLinkHandler}><Image alt='کپی ایکون' src={copySvgIcon}></Image></ItemDisposableLinkCopyBTN><p dir='ltr'>{props.data.link}</p></div>
     </ItemDisposableLinkMain>
   )
 }
@@ -52,6 +52,7 @@ gap: 8px;
 border-left: 1px solid #EEEEEE;
 
 p{
+direction: ltr;
     color: var(--Gray-3, #333);
 text-align: right;
 font-size: 16px;

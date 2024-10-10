@@ -7,17 +7,36 @@ import AddSquare from '@/public/images/svg/AddSquare.svg'
 import ItemDisposableLink from './ItemDisposableLink'
 import AddDisposableLinkPopup from '@/src/components/popups/AddDisposableLink'
 import { I_Link } from '@/src/utils/types/pages/questionnaireSetting'
-function DisposableLink(props:{status:boolean,data:I_Link[] | undefined,group_id:string, onClose:()=>void,statusPopup:boolean}) {
-let [exportExel,setExportExel]=useState(false)
-   
-    let exportExelHandler = ()=>{
-     
-        setExportExel(true)
-    setTimeout(()=>{
-        setExportExel(false)
+import axios, { AxiosRequestConfig } from 'axios';
+import { axiosInstance } from '@/src/utils/helper/axios'
+// import fs from 'fs/promises';
 
-    },100)
-    }
+function DisposableLink(props:{status:boolean,data:I_Link[] | undefined,group_id:string, onClose:()=>void,statusPopup:boolean}) {
+
+   
+    let exportExelHandler = async ()=>{
+     
+
+    
+            try {
+                const response = await axiosInstance().get(`/answer/answerlink/${props.group_id}/export_to_excel`);
+                
+                const outputFilename = `${Date.now()}.xls`;
+        
+                const url = URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', outputFilename);
+                document.body.appendChild(link);
+                link.click();
+        
+   
+            } catch (error:any) {
+                console.log(error);
+                
+            }
+        }
+    
 
   return (
     <DisposableLinkMain status={props.status}>
@@ -59,9 +78,7 @@ let [exportExel,setExportExel]=useState(false)
 
 </TableDisposableLink>
 </TableVersionContainer>
-{exportExel?
-        <iframe height={0} src={`/api/answer/answerlink/${props.group_id}/export_to_excel`} ></iframe>
-        :null}
+
     </DisposableLinkMain>
   )
 }
