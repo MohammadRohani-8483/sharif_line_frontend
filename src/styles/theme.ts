@@ -3,8 +3,8 @@ const theme = {
         main: "#2979FF",
         hover_main: "#1469F7",
         mainBack:{
-            main:'#CADEFF',
-            hover:"#A6C8FF"
+            main:'#cadeffdd',
+            hover:"#b3caf0dd"
         },
         neutral: {
             f: "#fff",

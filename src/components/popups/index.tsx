@@ -116,7 +116,7 @@ export const HeadPopup = styled.div`
     font-weight: 700;
   }
 
-  img {
+  i {
     cursor: pointer;
   }
 `;

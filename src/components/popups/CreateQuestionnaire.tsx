@@ -23,10 +23,8 @@ const CreateQuestionnaire = memo(({ onClose, open, id, setFlag }: Props) => {
   const { isPending, mutate } = useMutation({
     mutationFn: async (data: Object) => {
       if (data) {
-        
         let body: { form: Object; id?: string } = { form: data };
         if (id) body.id = id;
-
         await axiosInstance().post("question/form/", body);
       }
     },
@@ -59,14 +57,13 @@ const CreateQuestionnaire = memo(({ onClose, open, id, setFlag }: Props) => {
         <ContainerPopup>
           <HeadPopup>
             <p>افزودن پرسشنامه</p>
-            <div onClick={close}>
-              <Icon name="close" width={15} height={15} />
-            </div>
+            <Icon onClick={close} name="close" width={15} height={15} />
           </HeadPopup>
           <Body>
             <Link href={isPending ? "" : "/"}>
               <Button
                 disabled={isPending}
+                $colorMode="reversed"
                 style={{ padding: "16px 32px", fontWeight: 700 }}
               >
                 ایجاد پرسشنامه
@@ -90,7 +87,7 @@ const CreateQuestionnaire = memo(({ onClose, open, id, setFlag }: Props) => {
                         style={{ display: "flex", padding: 10, gap: 4 }}
                       >
                         {state.isDragActive ? (
-                          "رها کنید ..."
+                          "فایل را رها کنید"
                         ) : (
                           <>
                             یا <Text $color="#2979FF">انتخاب</Text> کنید یا
