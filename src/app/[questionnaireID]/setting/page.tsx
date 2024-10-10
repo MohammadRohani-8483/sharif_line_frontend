@@ -125,6 +125,7 @@ let PatchHandler=async () => {
         </TimingSection>
 
     </QuestionnaireTimingContainer>
+    <Version qroup_id={params.questionnaireID} addClick={()=>setOpen((p) => !p)} data={questionnaireData?.versions} setActiveVersion={(number:number)=>setActiveVersion(number)} activeVersion={activeVersion}/>
     <CommunityStatus>
 
         {/* <TargetCommunityCheckbox onClick={() => {
@@ -140,7 +141,6 @@ let PatchHandler=async () => {
         <Paginate activePage={1} pageSize={12} itemsCount={DisposableLinkData?.count || 0} setPage={(page)=>chengePage(page)}/>
     
     </CommunityStatus>
-    <Version qroup_id={params.questionnaireID} addClick={()=>setOpen((p) => !p)} data={questionnaireData?.versions} setActiveVersion={(number:number)=>setActiveVersion(number)} activeVersion={activeVersion}/>
       <div className='btnMain'>
 
       <button onClick={()=>PatchHandler()} className='BTNsave'>
